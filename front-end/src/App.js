@@ -1,7 +1,16 @@
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    fetch('/text').then(res => res.json()).then(data => {
+      setText(data.text);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +26,7 @@ function App() {
         >
           Learn React
         </a>
-        <p>Simultaneous Delivery and Pickup with Time Windows by Ira and Sundhar</p>
+        <p>{text}</p>
       </header>
     </div>
   );
