@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/clarke-wright/static/css/main.f855e6bc.css",
+    "main.js": "/clarke-wright/static/js/main.b256f1d1.js",
+    "static/js/453.8460c1fb.chunk.js": "/clarke-wright/static/js/453.8460c1fb.chunk.js",
+    "static/media/logo.svg": "/clarke-wright/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/clarke-wright/index.html",
+    "main.f855e6bc.css.map": "/clarke-wright/static/css/main.f855e6bc.css.map",
+    "main.b256f1d1.js.map": "/clarke-wright/static/js/main.b256f1d1.js.map",
+    "453.8460c1fb.chunk.js.map": "/clarke-wright/static/js/453.8460c1fb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.b256f1d1.js"
+  ]
+}
