@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
         <p>Web App by Ira Kathane and Sundhar the V</p>
+        <p>Creation of Snarky and Murky</p>
       </header>
     </div>
   );
