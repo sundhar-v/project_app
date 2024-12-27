@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import Algorithm from './container/Algorithm/Algorithm';
-import Header from './container/Header/Header';
+import AppHeader from './container/AppHeader/AppHeader';
 
 const App = () => {
   return (
     <>
-      <Header />
+      <AppHeader />
       <Algorithm />
     </>
   );
