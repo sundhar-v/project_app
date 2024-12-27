@@ -43,5 +43,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://sundhar-v.github.io/project_app"
+  "homepage": "https://sundhar-v.github.io/project_app",
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.3"
+  }
 }
