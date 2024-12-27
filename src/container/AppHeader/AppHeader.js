@@ -1,4 +1,7 @@
+import React from 'react';
 import Header from "../../component/Header/Header"
+
+import AppHeaderPropTypes from './AppHeader.propTypes';
 
 const AppHeader = ({ currentPage, setCurrentPage }) =>{
   return <Header 
@@ -6,5 +9,7 @@ const AppHeader = ({ currentPage, setCurrentPage }) =>{
     setCurrentPage={setCurrentPage}
   />
 }
+
+AppHeader.propTypes = AppHeaderPropTypes;
 
 export default AppHeader
