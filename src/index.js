@@ -5,14 +5,14 @@ import './index.css';
 import Algorithm from './container/Algorithm/Algorithm';
 import AppHeader from './container/AppHeader/AppHeader';
 
-import { PAGE_IDS } from './utils/constants';
+import { PAGE_DETAIL } from './utils/constants';
 
 const App = () => {
 
   const [currentPage, setCurrentPage] = useState('');
 
   useEffect(() => {
-    setCurrentPage(PAGE_IDS[0])
+    setCurrentPage(PAGE_DETAIL[0].id)
   }, [])
 
   return (
