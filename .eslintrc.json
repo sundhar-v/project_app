@@ -11,7 +11,7 @@
         "jsx": true
       }
     },
-    "plugins": ["react", "react-hooks"],
+    "plugins": ["react", "react-hooks", "eslint-plugin-html"],
     "rules": {
         "indent": ["error", 2],
         "react/jsx-indent": ["error", 2], // For JSX files
