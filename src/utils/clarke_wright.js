@@ -10,9 +10,9 @@ const xCoords = Array.from({ length: nCustomers + 1 }, () => randGen() * 200);
 const yCoords = Array.from({ length: nCustomers + 1 }, () => randGen() * 100);
 const demands = [0, ...Array.from({ length: nCustomers }, () => Math.floor(randGen() * maxCustomerDemand))];
 
-const plotCoordinates = (xCoords, yCoords) => {
-  console.log("Plotting coordinates: Please use a graphical library for visualization.");
-}
+// const plotCoordinates = (xCoords, yCoords) => {
+//   console.log("Plotting coordinates: Please use a graphical library for visualization.");
+// }
 
 // Distance Matrix
 const calculateDistanceMatrix = (xCoords, yCoords) => {
@@ -34,7 +34,7 @@ const calculateDistanceMatrix = (xCoords, yCoords) => {
 const distances = calculateDistanceMatrix(xCoords, yCoords);
 
 // Savings Calculation
-const calculateSavings = (distances, demands) => {
+const calculateSavings = (distances) => {
   const savings = new Map();
 
   for (let i = 1; i < distances.length; i++) {
@@ -50,7 +50,7 @@ const calculateSavings = (distances, demands) => {
     .map(([key, value]) => ({ link: key, saving: value }));
 }
 
-const savings = calculateSavings(distances, demands);
+const savings = calculateSavings(distances);
 
 // Helper Functions
 const parseLink = (link) => link.match(/\d+/g).map(Number);
@@ -117,4 +117,4 @@ nodesRemaining.forEach((node) => {
   if (demands[node] <= vehicleCapacity) routes.push([0, node, 0]);
 })
 
-console.log("Routes:", routes);
+export { nCustomers, xCoords, yCoords, distances, demands, routes }
