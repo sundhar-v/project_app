@@ -12,7 +12,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
   return <header className="navbar bg-secondary">
     <section className="navbar-section ml-2">
       <img height={"35px"} width={"35px"} src={Logo} alt="IIMA" />
-      <span className="text-dark m-2"><b>{"Vehicle Routing"}</b></span>
+      <span className="text-dark m-2"><b>{"Vehicle Routing with Time Windows"}</b></span>
     </section>
     <section className="navbar-center">
       {PAGE_DETAIL.map(page => 
