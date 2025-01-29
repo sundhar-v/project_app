@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import 'spectre.css';
 
 import MasterContainer from './container/MasterContainer/MasterContainer';
 import AppHeader from './container/AppHeader/AppHeader';
@@ -21,7 +22,9 @@ const App = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-      <MasterContainer />
+      <MasterContainer
+        currentPage={currentPage}
+      />
     </>
   );
 }

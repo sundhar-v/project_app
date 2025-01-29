@@ -8,7 +8,7 @@ export const PAGE_DETAIL = [
     name: "Get Started"
   },
   {
-    id: "aboutus",
-    name: "About Us"
+    id: "about",
+    name: "About"
   }
 ]

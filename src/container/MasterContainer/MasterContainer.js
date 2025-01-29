@@ -1,11 +1,15 @@
 import React from 'react';
 
-const MasterContainer = () => {
+import MasterContainerPropTypes from './MasterContainer.propTypes';
+
+const MasterContainer = ({currentPage}) => {
   return (
     <div>
-      {"Hello"}
+      {currentPage}
     </div>
   )
 }
+
+MasterContainer.propTypes = MasterContainerPropTypes;
 
 export default MasterContainer
