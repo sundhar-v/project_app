@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-import Algorithm from './container/Algorithm/Algorithm';
+import MasterContainer from './container/MasterContainer/MasterContainer';
 import AppHeader from './container/AppHeader/AppHeader';
 
 import { PAGE_DETAIL } from './utils/constants';
@@ -21,9 +21,7 @@ const App = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-      <Algorithm 
-        currentPage={currentPage}
-      />
+      <MasterContainer />
     </>
   );
 }

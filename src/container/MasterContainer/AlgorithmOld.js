@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { nCustomers, xCoords, yCoords, demands, distances, routes } from '../../utils/clarke_wright';
+import { nCustomers, xCoords, yCoords, demands, routes } from '../../utils/clarke_wright';
 
-const Algorithm = () =>{
+const AlgorithmOld = () => {
   return (
     <div>
       <table className="table-auto border-2">
@@ -25,18 +25,6 @@ const Algorithm = () =>{
       </table>
       <table className="table-auto border-2">
         <tr>
-          <th>{"Distance"}</th>
-          {Array(nCustomers+1).keys().map(i => <td key={i}><b>{i}</b></td>)}
-        </tr>
-        {Array(nCustomers+1).keys().map(i => (
-          <tr key={i}>
-            <td><b>{i}</b></td>
-            {Array(nCustomers+1).keys().map(j => <td key={j}>{distances[i][j]}</td>)}
-          </tr>
-        ))}
-      </table>
-      <table className="table-auto border-2">
-        <tr>
           <td><b>Route #</b></td>
           <td><b>Route</b></td>
         </tr>
@@ -51,4 +39,4 @@ const Algorithm = () =>{
   )
 }
 
-export default Algorithm
+export default AlgorithmOld
