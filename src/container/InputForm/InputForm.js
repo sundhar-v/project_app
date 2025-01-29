@@ -5,10 +5,10 @@ const InputForm = () => {
     <div className="card-header">
       <div className="card-title h5">Enter Your Input</div>
     </div>
-    <div className="card-body">
+    <div className="card-body p-centered">
       <form className="form-horizontal">
         <div className="form-group">
-          <div className="col-4 col-sm-12 text-left">
+          <div className="col-6 col-sm-12 text-left">
             <label className="form-label" htmlFor="customers">Customers</label>
           </div>
           <div className="col-6 col-sm-12">
@@ -16,7 +16,7 @@ const InputForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <div className="col-4 col-sm-12 text-left">
+          <div className="col-6 col-sm-12 text-left">
             <label className="form-label" htmlFor="customers">Vehicle Capacity</label>
           </div>
           <div className="col-6 col-sm-12">
@@ -26,12 +26,9 @@ const InputForm = () => {
       </form>
     </div>
     <div className="card-footer">
-      <div className="btn-group btn-group-block">
-        <button className="btn btn-link">Clear Input</button>
-        <button className="btn btn-primary">
-          {"Generate Random Data"}
-        </button>
-      </div>
+      <button className="btn btn-primary">
+        {"Generate Random Data"}
+      </button>
     </div>
   </div>
 }
