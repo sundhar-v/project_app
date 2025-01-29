@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Header.css"
 
 import Logo from '../../assets/favicon.png'
 import IIMALogo from '../../assets/IIMA_NewLOGO.jpg'
@@ -11,7 +12,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
   return <header className="navbar bg-secondary">
     <section className="navbar-section ml-2">
       <img height={"35px"} width={"35px"} src={Logo} alt="IIMA" />
-      <span className="text-dark m-2">{"Vehicle Routing"}</span>
+      <span className="text-dark m-2"><b>{"Vehicle Routing"}</b></span>
     </section>
     <section className="navbar-center">
       {PAGE_DETAIL.map(page => 
@@ -19,8 +20,8 @@ const Header = ({ currentPage, setCurrentPage }) => {
           key={page.id}
           className={
             page.id === currentPage ?
-              "btn btn-link text-primary" :
-              "btn btn-link text-dark"
+              "btn btn-link text-primary mr-2 ml-2" :
+              "btn btn-link text-dark mr-2 ml-2"
           }
           onClick={() => setCurrentPage(page.id)}
         >

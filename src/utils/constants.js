@@ -12,3 +12,5 @@ export const PAGE_DETAIL = [
     name: "About"
   }
 ]
+
+export const stepValues = ["Enter Input", "Input Preview", "Output"];
