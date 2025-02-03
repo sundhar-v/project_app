@@ -40,7 +40,7 @@ const InputForm = ({
         </div>
         <div className="form-group">
           <div className="col-6 col-sm-12 text-left">
-            <label className="form-label" htmlFor="customers">Vehicle Capacity</label>
+            <label className="form-label" htmlFor="vehiclecap">Vehicle Capacity</label>
           </div>
           <div className="col-6 col-sm-12">
             <input

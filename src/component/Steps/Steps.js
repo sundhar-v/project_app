@@ -16,7 +16,7 @@ const Steps = ({stepNumber, setCurrentStep}) => {
       {stepValues.map((value, i) => (
         <li className={stepNumber === i ? "step-item active" : "step-item"} key={i}>
           <a
-            className={stepNumber > i ? "c-hand" : ""}
+            className={stepNumber > i ? "c-hand" : stepNumber < i ? "c-not-allowed" : ""}
             data-tooltip={value}
             onClick={() => navigateStep(i)}
           >
