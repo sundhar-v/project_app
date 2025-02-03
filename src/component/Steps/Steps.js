@@ -4,12 +4,22 @@ import StepsPropTypes from "./Steps.propTypes";
 
 import { stepValues } from "../../utils/constants";
 
-const Steps = ({stepNumber}) => {
+const Steps = ({stepNumber, setCurrentStep}) => {
+  const navigateStep = (clicked) => {
+    if (clicked < stepNumber) {
+      setCurrentStep(clicked)
+    }
+  }
+
   return <div className="toparea">
     <ul className="step">
       {stepValues.map((value, i) => (
         <li className={stepNumber === i ? "step-item active" : "step-item"} key={i}>
-          <a className="tooltip" data-tooltip={value}>
+          <a
+            className={stepNumber > i ? "c-hand" : ""}
+            data-tooltip={value}
+            onClick={() => navigateStep(i)}
+          >
             {value}
           </a>
         </li>

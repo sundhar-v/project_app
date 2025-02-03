@@ -9,8 +9,11 @@
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "gh-pages": "^6.2.0",
+    "plotly.js": "^3.0.0",
+    "plotly.js-dist": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-plotly.js": "^2.6.0",
     "react-scripts": "5.0.1",
     "spectre.css": "^0.5.9",
     "web-vitals": "^2.1.4"
