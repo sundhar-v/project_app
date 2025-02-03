@@ -5,6 +5,9 @@ import Steps from '../../component/Steps/Steps';
 
 import InputForm from '../InputForm/InputForm';
 import UploadData from '../UploadData/UploadData';
+import InputPreview from '../InputPreview/InputPreview';
+
+import { generateRandomData } from '../../utils/data_initialization';
 
 const Home = () => {
   // Values for current step - 0 [input form]/1 - [input visual]/2 - [output]
@@ -13,6 +16,7 @@ const Home = () => {
   const [excelInputMode, setExcelInputMode] = useState(false)
   const [numberOfCustomers, setNumberOfCustomers] = useState(23);
   const [vehicleCapacity, setVehicleCapacity] = useState(100);
+  const [inputData, setInputData] = useState({});
 
   useEffect(() => {
     if (currentStep === 1) {
@@ -20,10 +24,16 @@ const Home = () => {
         // parse data from excel
       }
       else {
-        //generate data
+        const data = generateRandomData(numberOfCustomers, vehicleCapacity)
+        setInputData(data)
       }
     }
-  }, [currentStep, excelInputMode])
+  }, [
+    currentStep,
+    excelInputMode,
+    numberOfCustomers,
+    vehicleCapacity
+  ])
 
   return <div>
     <Steps
@@ -44,7 +54,9 @@ const Home = () => {
           />
         }
       />
-      : <></>
+      : currentStep === 1
+        ? <InputPreview inputData={inputData}/>
+        : <></>
     }
   </div>
 }
