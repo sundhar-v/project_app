@@ -9,7 +9,19 @@ const InputPreview = ({ inputData = {} }) => {
   return Object.keys(inputData).length 
     ? <div className="plotarea">
       <Plot
-        data={[{
+        data={[
+          {
+            x: [inputData.depot.x],
+            y: [inputData.depot.y],
+            type: 'scatter',
+            mode: 'markers+text',
+            showlegend: false,
+            text: "Depot",
+            marker: { size: 44, color: '#ffb700', symbol: 'octagon' },
+            textfont: {color: '#000', family: 'SUSE'},
+            hoverlabel: { font: {family: 'SUSE'} },
+            hovertemplate: "(x, y): (%{x}, %{y}) <extra></extra>"
+          }, {
           x: inputData.xCoords,
           y: inputData.yCoords,
           type: 'scatter',
@@ -20,17 +32,6 @@ const InputPreview = ({ inputData = {} }) => {
           textfont: {color: '#fff', family: 'SUSE'},
           hoverlabel: { font: {family: 'SUSE'} },
           hovertemplate: inputData.hoverTemplates
-        }, {
-          x: [inputData.depot.x],
-          y: [inputData.depot.y],
-          type: 'scatter',
-          mode: 'markers+text',
-          showlegend: false,
-          text: "Depot",
-          marker: { size: 44, color: '#ffb700', symbol: 'octagon' },
-          textfont: {color: '#000', family: 'SUSE'},
-          hoverlabel: { font: {family: 'SUSE'} },
-          hovertemplate: "(x, y): (%{x}, %{y}) <extra></extra>"
         }]}
         layout={{
           width: 1000,

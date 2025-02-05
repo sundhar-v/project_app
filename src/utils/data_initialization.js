@@ -6,7 +6,7 @@ const generateRandomArray = (n, min, max) => Array.from(
 const generateHoverTemplates = (numberOfCustomers, demands, pickups) => {
   let templates = []
   console.log(demands, pickups)
-  for (let i = 1; i < numberOfCustomers + 1; i++) {
+  for (let i = 0; i < numberOfCustomers; i++) {
     templates.push("(x, y): (%{x}, %{y})<br>Demand: "+demands[i]+"<br>Pickup: "+pickups[i]+"<extra></extra>")
   }
   return templates
