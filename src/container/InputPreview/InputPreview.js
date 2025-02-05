@@ -1,27 +1,45 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import "./InputPreview.css"
 
 import InputPreviewPropTypes from './InputPreview.propTypes'
 
 /* eslint-disable */
-const InputPreview = ({ inputData }) => {
+const InputPreview = ({ inputData = {} }) => {
   return Object.keys(inputData).length 
-    ? <Plot
-      data={[{
-        x: inputData.xCoords,
-        y: inputData.yCoords,
-        type: 'scatter',
-        mode: 'markers',
-        marker: {color: 'blue'}
-      }, {
-        x: [inputData.depot.x],
-        y: [inputData.depot.y],
-        type: 'scatter',
-        mode: 'markers',
-        marker: {color: 'red'},
-      }]}
-      layout={ {width: 600, height: 400, title: {text: 'Input Plot'}} }
-    />
+    ? <div className="plotarea">
+      <Plot
+        data={[{
+          x: inputData.xCoords,
+          y: inputData.yCoords,
+          type: 'scatter',
+          mode: 'markers+text',
+          showlegend: false,
+          text: Array.from({length: inputData.xCoords.length}, (_, i) => String(i + 1)),
+          marker: { size: 24, color: '#3b4351', symbol: 'square' },
+          textfont: {color: '#fff', family: 'SUSE'},
+          hoverlabel: { font: {family: 'SUSE'} },
+          hovertemplate: inputData.hoverTemplates
+        }, {
+          x: [inputData.depot.x],
+          y: [inputData.depot.y],
+          type: 'scatter',
+          mode: 'markers+text',
+          showlegend: false,
+          text: "Depot",
+          marker: { size: 44, color: '#ffb700', symbol: 'octagon' },
+          textfont: {color: '#000', family: 'SUSE'},
+          hoverlabel: { font: {family: 'SUSE'} },
+          hovertemplate: "(x, y): (%{x}, %{y}) <extra></extra>"
+        }]}
+        layout={{
+          width: 1000,
+          height: 600,
+          xaxis: { showgrid: false, zeroline: false, visible: false },
+          yaxis: { showgrid: false, zeroline: false, visible: false }
+        }}
+      />
+    </div>
     : <></>
 }
 /* eslint-enable */

@@ -24,7 +24,7 @@ const Home = () => {
         // parse data from excel
       }
       else {
-        const data = generateRandomData(numberOfCustomers, vehicleCapacity)
+        const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity)
         setInputData(data)
       }
     }

@@ -1,15 +1,30 @@
+const generateRandomArray = (n, min, max) => Array.from(
+  { length: n }, 
+  () => Math.floor(Math.random() * (max - min + 1)) + min
+);
+
+const generateHoverTemplates = (numberOfCustomers, demands, pickups) => {
+  let templates = []
+  console.log(demands, pickups)
+  for (let i = 1; i < numberOfCustomers + 1; i++) {
+    templates.push("(x, y): (%{x}, %{y})<br>Demand: "+demands[i]+"<br>Pickup: "+pickups[i]+"<extra></extra>")
+  }
+  return templates
+}
+
 export const generateRandomData = (numberOfCustomers, vehicleCapacity) => {
-  const randGen = () => Math.random();
-  const xCoords = Array.from({ length: numberOfCustomers + 1 }, () => randGen() * 200);
-  const yCoords = Array.from({ length: numberOfCustomers + 1 }, () => randGen() * 100);
-  const demands = Array.from({ length: numberOfCustomers }, () => Math.floor(randGen() * vehicleCapacity));
-  const pickups = Array.from({ length: numberOfCustomers }, () => Math.floor(randGen() * vehicleCapacity));
+  const xCoords = generateRandomArray(numberOfCustomers + 1, 1, 200)
+  const yCoords = generateRandomArray(numberOfCustomers + 1, 1, 100)
+  const demands = generateRandomArray(numberOfCustomers, 0, vehicleCapacity)
+  const pickups = generateRandomArray(numberOfCustomers, 0, vehicleCapacity)
+  const hoverTemplates = generateHoverTemplates(numberOfCustomers, demands, pickups)
 
   return {
     depot: {x: xCoords[0], y: yCoords[0]},
     xCoords: xCoords.slice(1),
     yCoords: yCoords.slice(1),
     demands,
-    pickups
+    pickups,
+    hoverTemplates
   }
 }
