@@ -1,6 +1,45 @@
 import React from 'react';
 
-const UploadData = () => {
+import { isValidFileUploaded } from '../../utils/functions';
+
+import UploadDataPropTypes from './UploadData.propTypes';
+
+const UploadData = ({ 
+  setCurrentStep,
+  setExcelInputMode,
+  setInputFile,
+  inputFileValidity,
+  setInputFileValidity,
+  setToastText,
+  setToastStatus
+}) => {
+  const showErrorToast = () => {
+    setToastText("Unsupported file format. Upload xls/xlsx/csv files.")
+    setToastStatus(true)
+  }
+
+  const onUploadFile = (e) => {
+    if(e.target.files.length < 1){
+      return;
+    }
+    const file = e.target.files[0];
+    if(isValidFileUploaded(file)){
+      setInputFile(file)
+      setInputFileValidity(true)
+    }else{
+      showErrorToast()
+    }
+  }
+
+  const proceedToPreview = () => {
+    if (inputFileValidity) {
+      setCurrentStep(1)
+      setExcelInputMode(true)
+    } else {
+      showErrorToast()
+    }
+  }
+
   return <div className="card">
     <div className="card-header">
       <div className="card-title h5">Upload File</div>
@@ -8,16 +47,26 @@ const UploadData = () => {
     <div className="card-body">
       <form className="form-horizontal">
         <div className="col-9 col-sm-12 p-centered">
-          <input className="form-input" type="file" id="file" />
+          <input 
+            className="form-input"
+            type="file"
+            id="file"
+            onChange={onUploadFile}
+          />
         </div>
       </form>
     </div>
     <div className="card-footer">
-      <button className="btn btn-primary">
+      <button
+        className={inputFileValidity ? "btn btn-primary" : "btn btn-primary disabled"}
+        onClick={proceedToPreview}
+      >
         {"Click to Proceed"}
       </button>
     </div>
   </div>
 }
+
+UploadData.propTypes = UploadDataPropTypes
 
 export default UploadData

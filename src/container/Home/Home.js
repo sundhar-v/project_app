@@ -10,6 +10,7 @@ import InputPreview from '../InputPreview/InputPreview';
 
 import { generateRandomData } from '../../utils/data_initialization';
 
+/* eslint-disable */
 const Home = () => {
   // Values for current step - 0 [input form]/1 - [input visual]/2 - [output]
   const [currentStep, setCurrentStep] = useState(0);
@@ -17,6 +18,8 @@ const Home = () => {
   const [excelInputMode, setExcelInputMode] = useState(false)
   const [numberOfCustomers, setNumberOfCustomers] = useState(23);
   const [vehicleCapacity, setVehicleCapacity] = useState(100);
+  const [inputFile, setInputFile] = useState(null);
+  const [inputFileValidity, setInputFileValidity] = useState(false);
   const [inputData, setInputData] = useState({});
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
@@ -24,7 +27,7 @@ const Home = () => {
   useEffect(() => {
     if (currentStep === 1) {
       if (excelInputMode) {
-        // parse data from excel
+        console.log(inputFile) // process data
       }
       else {
         const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity)
@@ -35,7 +38,8 @@ const Home = () => {
     currentStep,
     excelInputMode,
     numberOfCustomers,
-    vehicleCapacity
+    vehicleCapacity,
+    inputFile
   ])
 
   useEffect(() => {
@@ -54,7 +58,17 @@ const Home = () => {
     />
     {currentStep === 0 
       ? <Divider
-        leftColumn={<UploadData />}
+        leftColumn={
+          <UploadData 
+            setCurrentStep={setCurrentStep}
+            setExcelInputMode={setExcelInputMode}
+            setInputFile={setInputFile}
+            inputFileValidity={inputFileValidity}
+            setInputFileValidity={setInputFileValidity}
+            setToastText={setToastText}
+            setToastStatus={setToastStatus}
+          />
+        }
         rightColumn={
           <InputForm 
             setCurrentStep={setCurrentStep}
@@ -74,5 +88,7 @@ const Home = () => {
     }
   </div>
 }
+
+/* eslint-enable */
 
 export default Home
