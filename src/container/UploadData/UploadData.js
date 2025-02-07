@@ -11,7 +11,8 @@ const UploadData = ({
   inputFileValidity,
   setInputFileValidity,
   setToastText,
-  setToastStatus
+  setToastStatus,
+  fileInputRef
 }) => {
   const showErrorToast = () => {
     setToastText("Unsupported file format. Upload xls/xlsx/csv files.")
@@ -51,6 +52,7 @@ const UploadData = ({
             className="form-input"
             type="file"
             id="file"
+            ref={fileInputRef}
             onChange={onUploadFile}
           />
         </div>

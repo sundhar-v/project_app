@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import Divider from '../../component/Divider/Divider';
 import Steps from '../../component/Steps/Steps';
@@ -24,6 +24,8 @@ const Home = () => {
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
 
+  const fileInputRef = useRef(null);
+
   useEffect(() => {
     if (currentStep === 1) {
       if (excelInputMode) {
@@ -41,6 +43,14 @@ const Home = () => {
     vehicleCapacity,
     inputFile
   ])
+
+  useEffect(() => {
+    if(fileInputRef.current && inputFile) {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(inputFile)
+      fileInputRef.current.files = dataTransfer.files
+    }
+  }, [currentStep, inputFile])
 
   useEffect(() => {
     if (toastStatus) {
@@ -67,6 +77,7 @@ const Home = () => {
             setInputFileValidity={setInputFileValidity}
             setToastText={setToastText}
             setToastStatus={setToastStatus}
+            fileInputRef={fileInputRef}
           />
         }
         rightColumn={
