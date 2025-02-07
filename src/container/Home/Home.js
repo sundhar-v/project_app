@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import Divider from '../../component/Divider/Divider';
 import Steps from '../../component/Steps/Steps';
+import Toast from '../../component/Toast/Toast';
 
 import InputForm from '../InputForm/InputForm';
 import UploadData from '../UploadData/UploadData';
@@ -17,6 +18,8 @@ const Home = () => {
   const [numberOfCustomers, setNumberOfCustomers] = useState(23);
   const [vehicleCapacity, setVehicleCapacity] = useState(100);
   const [inputData, setInputData] = useState({});
+  const [toastStatus, setToastStatus] = useState(false);
+  const [toastText, setToastText] = useState(false);
 
   useEffect(() => {
     if (currentStep === 1) {
@@ -35,7 +38,16 @@ const Home = () => {
     vehicleCapacity
   ])
 
+  useEffect(() => {
+    if (toastStatus) {
+      setTimeout(() => {
+        setToastStatus(false)
+      }, 2500)
+    }
+  }, [toastStatus])
+
   return <div>
+    {toastStatus ? <Toast text={toastText} setToastStatus={setToastStatus}/> : <></>}
     <Steps
       stepNumber={currentStep}
       setCurrentStep={setCurrentStep}
@@ -51,6 +63,8 @@ const Home = () => {
             setNumberOfCustomers={setNumberOfCustomers}
             vehicleCapacity={vehicleCapacity}
             setVehicleCapacity={setVehicleCapacity}
+            setToastText={setToastText}
+            setToastStatus={setToastStatus}
           />
         }
       />

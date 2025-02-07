@@ -8,11 +8,22 @@ const InputForm = ({
   numberOfCustomers,
   setNumberOfCustomers,
   vehicleCapacity,
-  setVehicleCapacity
+  setVehicleCapacity,
+  setToastText,
+  setToastStatus
 }) => {
   const generateData = () => {
-    setCurrentStep(1)
-    setExcelInputMode(false)
+    if (numberOfCustomers < 0 || numberOfCustomers >100) {
+      setToastText("Number of Customers should be in the range 1-100")
+      setToastStatus(true)
+    }
+    else if (vehicleCapacity <= 0 ) {
+      setToastText("Vehicle Capacity should not be negative")
+      setToastStatus(true)
+    } else {
+      setCurrentStep(1)
+      setExcelInputMode(false)
+    }
   }
 
   return <div className="card">
