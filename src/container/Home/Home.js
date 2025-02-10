@@ -7,6 +7,7 @@ import Toast from '../../component/Toast/Toast';
 import InputForm from '../InputForm/InputForm';
 import UploadData from '../UploadData/UploadData';
 import InputPreview from '../InputPreview/InputPreview';
+import Output from '../Output/Output';
 
 import { generateRandomData } from '../../utils/data_initialization';
 
@@ -29,7 +30,7 @@ const Home = () => {
   useEffect(() => {
     if (currentStep === 1) {
       if (excelInputMode) {
-        console.log(inputFile) // process data
+        console.log(inputFile) // process data using FileReader or external library
       }
       else {
         const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity)
@@ -95,7 +96,9 @@ const Home = () => {
       />
       : currentStep === 1
         ? <InputPreview inputData={inputData}/>
-        : <></>
+        : currentStep === 2
+          ? <Output />
+          : <></>
     }
   </div>
 }
