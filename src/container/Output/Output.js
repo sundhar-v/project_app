@@ -1,7 +1,16 @@
-// import React from 'react';
+import React from 'react';
+
+import OutputPropTypes from "./Output.propTypes"
 
 const Output = () => {
-  return "Hello World"
+
+  return (
+    <div>
+      {"Hello World"}
+    </div>
+  )
 }
+
+Output.propTypes = OutputPropTypes
 
 export default Output

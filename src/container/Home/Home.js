@@ -10,6 +10,7 @@ import InputPreview from '../InputPreview/InputPreview';
 import Output from '../Output/Output';
 
 import { generateRandomData } from '../../utils/data_initialization';
+import { generateDistanceMatrix, generateSavings } from '../../utils/simple_cw';
 
 /* eslint-disable */
 const Home = () => {
@@ -54,6 +55,23 @@ const Home = () => {
   }, [currentStep, inputFile])
 
   useEffect(() => {
+    if (currentStep === 2) {
+      const distanceMatrix = generateDistanceMatrix(
+        numberOfCustomers,
+        inputData.depot,
+        inputData.xCoords,
+        inputData.yCoords
+      )
+      const savings = generateSavings(distanceMatrix)
+      console.log(savings)
+    }
+  }, [
+    currentStep,
+    numberOfCustomers,
+    inputData
+  ])
+
+  useEffect(() => {
     if (toastStatus) {
       setTimeout(() => {
         setToastStatus(false)
@@ -95,7 +113,7 @@ const Home = () => {
         }
       />
       : currentStep === 1
-        ? <InputPreview inputData={inputData}/>
+        ? <InputPreview inputData={inputData} />
         : currentStep === 2
           ? <Output />
           : <></>
