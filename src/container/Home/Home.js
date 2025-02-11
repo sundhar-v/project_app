@@ -10,7 +10,12 @@ import InputPreview from '../InputPreview/InputPreview';
 import Output from '../Output/Output';
 
 import { generateRandomData } from '../../utils/data_initialization';
-import { generateDistanceMatrix, generateSavings } from '../../utils/simple_cw';
+import { 
+  generateDistanceMatrix,
+  generateNodesList,
+  generateSavings,
+  ClarkeWrightDelivery
+} from '../../utils/simple_cw';
 
 /* eslint-disable */
 const Home = () => {
@@ -62,8 +67,10 @@ const Home = () => {
         inputData.xCoords,
         inputData.yCoords
       )
-      const savings = generateSavings(distanceMatrix)
-      console.log(savings)
+      const [kimtiNodes, faltuNodes] = generateNodesList(inputData.demands, inputData.pickups)
+      const savings = generateSavings(distanceMatrix, faltuNodes)
+      const finalRoutes = ClarkeWrightDelivery(savings, kimtiNodes)
+      console.log(savings, finalRoutes)
     }
   }, [
     currentStep,
