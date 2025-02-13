@@ -51,11 +51,11 @@ const isNodeAvailable = (node, padosiNodes) => {
 
 export const ClarkeWrightDelivery = (savings, kimtiNodes) => {
   let padosiNodes = Object.fromEntries([...kimtiNodes].map(node => [node, []]))
-  let routes = []
+  // let routes = []
   for (let i=0; i<savings.length; i++) {
     const [node1, node2] = savings[i].pair
     if (isNodeAvailable(node1, padosiNodes) && isNodeAvailable(node2, padosiNodes)) {
-      
+      continue
     }
   }
 }

@@ -1,3 +1,3 @@
-const About = () => "About - created by Code Ninja and Chipkali"
+const About = () => "About - created by Ira and Sundhar"
 
 export default About
