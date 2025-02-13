@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/project_app/static/css/main.79c7d057.css",
-    "main.js": "/project_app/static/js/main.32e367ae.js",
+    "main.js": "/project_app/static/js/main.6eba86ce.js",
     "static/media/IIMA_NewLOGO.jpg": "/project_app/static/media/IIMA_NewLOGO.08e3f51984d464dcdf9a.jpg",
     "static/media/favicon.png": "/project_app/static/media/favicon.501a6ef36c14e311383c.png",
     "index.html": "/project_app/index.html",
     "main.79c7d057.css.map": "/project_app/static/css/main.79c7d057.css.map",
-    "main.32e367ae.js.map": "/project_app/static/js/main.32e367ae.js.map"
+    "main.6eba86ce.js.map": "/project_app/static/js/main.6eba86ce.js.map"
   },
   "entrypoints": [
     "static/css/main.79c7d057.css",
-    "static/js/main.32e367ae.js"
+    "static/js/main.6eba86ce.js"
   ]
 }
