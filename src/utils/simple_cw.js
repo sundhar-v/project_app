@@ -40,41 +40,22 @@ export const generateSavings = (distance, faltuNodes) => {
     }
   }
   savings.sort((a,b) => b.saving - a.saving)
+  //console.log(savings)
   return savings
 }
 
+// Returns false if degree of the node is >=2
+const isNodeAvailable = (node, padosiNodes) => {
+  return (padosiNodes[node].length < 2)
+}
+
 export const ClarkeWrightDelivery = (savings, kimtiNodes) => {
+  let padosiNodes = Object.fromEntries([...kimtiNodes].map(node => [node, []]))
   let routes = []
   for (let i=0; i<savings.length; i++) {
     const [node1, node2] = savings[i].pair
-    if (kimtiNodes.has(node1) && kimtiNodes.has(node2)) {
-      let routeFound = false
-      for (let x=0; x<routes.length; x++) {
-        if ((routes[x][0] === node1 && routes[x][routes[x].length-1] === node2) || (routes[x][0] === node2 && routes[x][routes[x].length-1] === node1)) {
-          // subtour formation
-          continue;
-        } else if (routes[x][0] === node1) {
-          routes[x].unshift(node2)
-          routeFound = true
-          break
-        } else if (routes[x][0] === node2) {
-          routes[x].unshift(node1)
-          routeFound = true
-          break
-        } else if (routes[x][routes[x].length-1] === node1) {
-          routes[x].push(node2)
-          routeFound = true
-          break
-        } else if (routes[x][routes[x].length-1] === node2) {
-          routes[x].push(node1)
-          routeFound = true
-          break
-        }
-      }
-      if (!routeFound) {
-        routes.push([node1, node2])
-      }
+    if (isNodeAvailable(node1, padosiNodes) && isNodeAvailable(node2, padosiNodes)) {
+      
     }
-    
   }
 }
