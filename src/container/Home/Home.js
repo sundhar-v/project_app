@@ -14,7 +14,7 @@ import {
   generateDistanceMatrix,
   generateNodesList,
   generateSavings,
-  ClarkeWrightDelivery
+  ClarkeWright
 } from '../../utils/simple_cw';
 import { toastTimer } from '../../utils/constants';
 
@@ -74,7 +74,7 @@ const Home = () => {
       )
       const [kimtiNodes, faltuNodes] = generateNodesList(inputData.demands, inputData.pickups)
       const savings = generateSavings(distanceMatrix, faltuNodes)
-      const finalRoutes = ClarkeWrightDelivery(savings, kimtiNodes)
+      const finalRoutes = ClarkeWright(savings, kimtiNodes, inputData)
       console.log(savings, finalRoutes)
     }
   }, [
