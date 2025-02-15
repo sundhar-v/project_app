@@ -16,6 +16,7 @@ import {
   generateSavings,
   ClarkeWrightDelivery
 } from '../../utils/simple_cw';
+import { toastTimer } from '../../utils/constants';
 
 /* eslint-disable */
 const Home = () => {
@@ -86,7 +87,7 @@ const Home = () => {
     if (toastStatus) {
       setTimeout(() => {
         setToastStatus(false)
-      }, 2500)
+      }, toastTimer)
     }
   }, [toastStatus])
 

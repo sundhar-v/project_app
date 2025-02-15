@@ -16,3 +16,5 @@ export const PAGE_DETAIL = [
 export const stepValues = ["Enter Input", "Input Preview", "Output"];
 
 export const minimumDeliveryWindowDuration = 120 // in minutes
+
+export const toastTimer = 2500 // in milliseconds
