@@ -28,6 +28,9 @@ const InputForm = ({
     else if (vehicleCapacity <= 0 ) {
       setToastText("Vehicle Capacity should not be negative")
       setToastStatus(true)
+    } else if (timeStringToMinutes(deliveryEnd)<=timeStringToMinutes(deliveryStart)) {
+      setToastText("Delivery ending time should be greater than the starting time")
+      setToastStatus(true)
     } else if (timeStringToMinutes(deliveryEnd)-timeStringToMinutes(deliveryStart)<minimumDeliveryWindowDuration) {
       setToastText("Minimum time window for deliveries should be greater than "+minimumDeliveryWindowDuration+" minutes")
       setToastStatus(true)
