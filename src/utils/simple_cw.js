@@ -44,6 +44,12 @@ export const generateSavings = (distance, faltuNodes) => {
   return savings
 }
 
+//check for degree-2 constraints
+const isViolatingDeg2Constraint = (node, route) => {
+  const idx = route.indexOf(node);
+  return idx !== -1 && idx !== 0 && idx !== route.length - 1;
+}
+
 const generateRouteCombinations = (routeA, routeB) => {
   const isMultipleNodesInA = routeA.length > 1;
   const isMultipleNodesInB = routeB.length > 1;
@@ -67,6 +73,33 @@ const generateRouteCombinations = (routeA, routeB) => {
   return routeCombinations;
 }
 
+const generateTempRoutes = (route1, route2, node1, node2) => {
+  // no match with existing routes
+  if (!route1 && !route2) {
+    return generateRouteCombinations([node1], [node2])
+  }
+  // match with 1 existing route
+  else if (route1 && !route2) {
+    if (!isViolatingDeg2Constraint(node1, route1)) {
+      return generateRouteCombinations(route1, [node2])
+    }
+  }
+  else if (!route1 && route2) {
+    if (!isViolatingDeg2Constraint(node2, route2)){
+      return generateRouteCombinations([node1], route2)
+    }
+  }
+  // match with 2 existing routes
+  else if (route1 !== route2) {
+    if (!isViolatingDeg2Constraint(node1, route1) && !isViolatingDeg2Constraint(node2, route2)){
+      return generateRouteCombinations(route1, route2)
+    }
+  }
+
+  // If the nodes 1 & 2 belong to the same route, there will not be any routes generated
+  return null
+}
+
 const isDeliveryPickupFeasible = (route, inputData) => {
   return
 }
@@ -84,7 +117,6 @@ export const ClarkeWright = (savings, kimtiNodes) => {
     // proceed if both customers have atleast delivery or pickup scheduled
     if (kimtiNodes.has(node1) && kimtiNodes.has(node2)) {
       let route1 = null, route2 = null
-      let routeCombinations = null
 
       for (let j=0; j<routes.length; j++) {
         if (routes[j].includes(node1)) {
@@ -95,26 +127,11 @@ export const ClarkeWright = (savings, kimtiNodes) => {
         }
       }
 
-      // no match with existing routes
-      if (!route1 && !route2) {
-        routeCombinations = generateRouteCombinations([node1], [node2])
-      }
-      // match with 1 existing route
-      else if (route1 && !route2) {
-        routeCombinations = generateRouteCombinations(route1, [node2])
-      }
-      else if (!route1 && route2) {
-        routeCombinations = generateRouteCombinations([node1], route2)
-      }
-      // match with 2 existing routes
-      else if (route1 !== route2) {
-        routeCombinations = generateRouteCombinations(route1, route2)
-      }
+      let routeCombinations = generateTempRoutes(route1, route2, node1, node2)
 
       // check for Delivery and Pickup feasibility for all the generated routes
-      // If the nodes 1 & 2 belong to the same route, there will not be any routes generated
       if (routeCombinations) {
-        
+
       }
     }
 
