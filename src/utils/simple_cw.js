@@ -54,6 +54,7 @@ export const ClarkeWrightDelivery = (savings, kimtiNodes) => {
   // let routes = []
   for (let i=0; i<savings.length; i++) {
     const [node1, node2] = savings[i].pair
+    // degree 2 constraints check
     if (isNodeAvailable(node1, padosiNodes) && isNodeAvailable(node2, padosiNodes)) {
       continue
     }

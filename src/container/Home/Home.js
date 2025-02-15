@@ -25,6 +25,8 @@ const Home = () => {
   const [excelInputMode, setExcelInputMode] = useState(false)
   const [numberOfCustomers, setNumberOfCustomers] = useState(23);
   const [vehicleCapacity, setVehicleCapacity] = useState(100);
+  const [deliveryStart, setDeliveryStart] = useState("00:00");
+  const [deliveryEnd, setDeliveryEnd] = useState("23:59");
   const [inputFile, setInputFile] = useState(null);
   const [inputFileValidity, setInputFileValidity] = useState(false);
   const [inputData, setInputData] = useState({});
@@ -39,7 +41,7 @@ const Home = () => {
         console.log(inputFile) // process data using FileReader or external library
       }
       else {
-        const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity)
+        const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity, deliveryStart, deliveryEnd)
         setInputData(data)
       }
     }
@@ -48,6 +50,8 @@ const Home = () => {
     excelInputMode,
     numberOfCustomers,
     vehicleCapacity,
+    deliveryStart,
+    deliveryEnd,
     inputFile
   ])
 
@@ -114,6 +118,10 @@ const Home = () => {
             setNumberOfCustomers={setNumberOfCustomers}
             vehicleCapacity={vehicleCapacity}
             setVehicleCapacity={setVehicleCapacity}
+            deliveryStart={deliveryStart}
+            setDeliveryStart={setDeliveryStart}
+            deliveryEnd={deliveryEnd}
+            setDeliveryEnd={setDeliveryEnd}
             setToastText={setToastText}
             setToastStatus={setToastStatus}
           />

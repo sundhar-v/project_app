@@ -1,6 +1,10 @@
 import React from 'react';
+import "./InputForm.css"
 
 import InputFormPropTypes from './InputForm.propTypes'
+
+import { timeStringToMinutes } from '../../utils/functions';
+import { minimumDeliveryWindowDuration } from '../../utils/constants';
 
 const InputForm = ({
   setCurrentStep,
@@ -9,6 +13,10 @@ const InputForm = ({
   setNumberOfCustomers,
   vehicleCapacity,
   setVehicleCapacity,
+  deliveryStart,
+  setDeliveryStart,
+  deliveryEnd,
+  setDeliveryEnd,
   setToastText,
   setToastStatus
 }) => {
@@ -20,6 +28,9 @@ const InputForm = ({
     else if (vehicleCapacity <= 0 ) {
       setToastText("Vehicle Capacity should not be negative")
       setToastStatus(true)
+    } else if (timeStringToMinutes(deliveryEnd)-timeStringToMinutes(deliveryStart)<minimumDeliveryWindowDuration) {
+      setToastText("Minimum time window for deliveries should be greater than "+minimumDeliveryWindowDuration+" minutes")
+      setToastStatus(true)
     } else {
       setCurrentStep(1)
       setExcelInputMode(false)
@@ -30,13 +41,13 @@ const InputForm = ({
     <div className="card-header">
       <div className="card-title h5">Enter Your Input</div>
     </div>
-    <div className="card-body p-centered">
+    <div className="card-body p-centered formContainer">
       <form className="form-horizontal">
         <div className="form-group">
-          <div className="col-6 col-sm-12 text-left">
+          <div className="col-4 col-sm-12 text-left">
             <label className="form-label" htmlFor="customers">Customers</label>
           </div>
-          <div className="col-6 col-sm-12">
+          <div className="col-8 col-sm-12">
             <input
               className="form-input"
               type="number"
@@ -50,10 +61,10 @@ const InputForm = ({
           </div>
         </div>
         <div className="form-group">
-          <div className="col-6 col-sm-12 text-left">
+          <div className="col-4 col-sm-12 text-left">
             <label className="form-label" htmlFor="vehiclecap">Vehicle Capacity</label>
           </div>
-          <div className="col-6 col-sm-12">
+          <div className="col-8 col-sm-12">
             <input
               className="form-input"
               type="number"
@@ -61,6 +72,29 @@ const InputForm = ({
               placeholder="e.g: 100"
               value={vehicleCapacity}
               onChange={(e) => setVehicleCapacity(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-4 col-sm-12 text-left">
+            <label className="form-label" htmlFor="vehiclecap">Delivery Time</label>
+          </div>
+          <div className="col-4 col-sm-12">
+            <input
+              className="form-input"
+              type="time"
+              id="deliveryStart"
+              value={deliveryStart}
+              onChange={(e) => setDeliveryStart(e.target.value)}
+            />
+          </div>
+          <div className="col-4 col-sm-12">
+            <input
+              className="form-input"
+              type="time"
+              id="deliveryEnd"
+              value={deliveryEnd}
+              onChange={(e) => setDeliveryEnd(e.target.value)}
             />
           </div>
         </div>
