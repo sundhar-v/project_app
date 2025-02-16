@@ -16,7 +16,7 @@ import {
   generateSavings,
   ClarkeWright
 } from '../../utils/simple_cw';
-import { toastTimer } from '../../utils/constants';
+import { toastTimer, averageVehicleSpeed, maximumWaitingTime } from '../../utils/constants';
 
 /* eslint-disable */
 const Home = () => {
@@ -33,6 +33,8 @@ const Home = () => {
   const [inputData, setInputData] = useState({});
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
+  // const [averageVehicleSpeed] = useState(averageVehicleSpeed);
+  // const [maximumWaitingTime] = useState(maximumWaitingTime);
 
   const fileInputRef = useRef(null);
 
@@ -74,7 +76,17 @@ const Home = () => {
       )
       const [kimtiNodes, faltuNodes] = generateNodesList(inputData.demands, inputData.pickups)
       const savings = generateSavings(distanceMatrix, faltuNodes)
-      const finalRoutes = ClarkeWright(savings, kimtiNodes, vehicleCapacity, inputData)
+      const finalRoutes = ClarkeWright(
+        savings,
+        kimtiNodes,
+        vehicleCapacity,
+        inputData,
+        distanceMatrix,
+        averageVehicleSpeed,
+        maximumWaitingTime,
+        deliveryStart,
+        deliveryEnd
+      )
       console.log(savings, finalRoutes)
     }
   }, [

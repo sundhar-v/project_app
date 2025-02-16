@@ -1,3 +1,5 @@
+import { timeStringToMinutes } from "./functions"
+
 export const generateDistanceMatrix = (n, depot, xCoords, yCoords) => {
   const xCoordinates = [depot.x, ...xCoords]
   const yCoordinates = [depot.y, ...yCoords]
@@ -73,7 +75,17 @@ const generateRouteCombinations = (routeA, routeB) => {
   return routeCombinations;
 }
 
+const calculateRouteTotalDemand = (inputList, inputData) => {
+  let routeDemand = 0
+  for (const node of inputList) {
+    routeDemand = routeDemand + inputData.demands[node-1]
+  }
+  return routeDemand
+}
+
 const isDeliveryFromDepotFeasible = (route1, route2, node1, node2, vehicleCapacity, inputData) => {
+  // sums the demand of all the nodes in the new route (order doesn't matter because nodes same across different combinations)
+  // and checks if the vehicle has the capacity to carry the goods from the depot
   let nodes = new Set()
   nodes.add(node1)
   nodes.add(node2)
@@ -84,10 +96,7 @@ const isDeliveryFromDepotFeasible = (route1, route2, node1, node2, vehicleCapaci
     route2.forEach(node => nodes.add(node))
   }
   
-  let routeDemand = 0
-  for (const node of nodes) {
-    routeDemand = routeDemand + inputData.demands[node-1]
-  }
+  const routeDemand = calculateRouteTotalDemand(nodes, inputData)
 
   return routeDemand <= vehicleCapacity
 }
@@ -123,12 +132,42 @@ const generateTempRoutes = (route1, route2, node1, node2, vehicleCapacity, input
   return null
 }
 
-const isRouteFeasible = (route, inputData) => {
-   
+const isRouteFeasible = (route, vehicleCapacity, inputData, distanceMatrix, averageVehicleSpeed, maximumWaitingTime, deliveryStart, deliveryEnd) => {
+  let currentVehicleCap = calculateRouteTotalDemand(route, inputData)
+  let currentTime = deliveryStart
+  let currentNode = 0
+  for (const node of route) {
+    // Time window feasibility
+    currentTime = currentTime + (distanceMatrix[currentNode][node] / averageVehicleSpeed) * 60
+    // if arrival time at node exceeds delivery end or made to wait more than tolerable waiting limit then the route is not feasible
+    if (currentTime > deliveryEnd || (inputData.timeWindows[node-1][0] - currentTime) > maximumWaitingTime) {
+      return false
+    }
+    // capacity feasibility
+    currentVehicleCap = currentVehicleCap - inputData.demands[node-1] + inputData.pickups[node]
+    if (currentVehicleCap > vehicleCapacity) {
+      return false
+    }
+    currentNode = node
+  }
+  return true
 }
 
-export const ClarkeWright = (savings, kimtiNodes, vehicleCapacity, inputData) => {
+export const ClarkeWright = (
+  savings,
+  kimtiNodes,
+  vehicleCapacity,
+  inputData,
+  distanceMatrix,
+  averageVehicleSpeed,
+  maximumWaitingTime,
+  deliveryStart,
+  deliveryEnd
+) => {
   let routes = []
+
+  const dStart = timeStringToMinutes(deliveryStart)
+  const dEnd = timeStringToMinutes(deliveryEnd)
 
   for (let i=0; i<savings.length; i++) {
     const [node1, node2] = savings[i].pair
@@ -150,12 +189,23 @@ export const ClarkeWright = (savings, kimtiNodes, vehicleCapacity, inputData) =>
 
       // check for Delivery and Pickup feasibility for all the generated routes
       if (tempRoutes) {
+        let feasibleRoutes = [];
         // NOTE: create a single function to check for feasibility
         for (let k=0; k<tempRoutes.length; k++) {
-          if (isRouteFeasible(tempRoutes[k], inputData)) {
+          if (isRouteFeasible(
+            tempRoutes[k],
+            vehicleCapacity,
+            inputData,
+            distanceMatrix,
+            averageVehicleSpeed,
+            maximumWaitingTime,
+            dStart,
+            dEnd
+          )) {
             feasibleRoutes.push(tempRoutes[k])
           }
         }
+        console.log(feasibleRoutes)
         // Rank all feasible routes and push the best to the routes array
       }
     }
