@@ -74,12 +74,13 @@ const Home = () => {
       )
       const [kimtiNodes, faltuNodes] = generateNodesList(inputData.demands, inputData.pickups)
       const savings = generateSavings(distanceMatrix, faltuNodes)
-      const finalRoutes = ClarkeWright(savings, kimtiNodes, inputData)
+      const finalRoutes = ClarkeWright(savings, kimtiNodes, vehicleCapacity, inputData)
       console.log(savings, finalRoutes)
     }
   }, [
     currentStep,
     numberOfCustomers,
+    vehicleCapacity,
     inputData
   ])
 

@@ -73,7 +73,30 @@ const generateRouteCombinations = (routeA, routeB) => {
   return routeCombinations;
 }
 
-const generateTempRoutes = (route1, route2, node1, node2) => {
+const isDeliveryFromDepotFeasible = (route1, route2, node1, node2, vehicleCapacity, inputData) => {
+  let nodes = new Set()
+  nodes.add(node1)
+  nodes.add(node2)
+  if (route1) {
+    route1.forEach(node => nodes.add(node))
+  }
+  if (route2) {
+    route2.forEach(node => nodes.add(node))
+  }
+  
+  let routeDemand = 0
+  for (const node of nodes) {
+    routeDemand = routeDemand + inputData.demands[node-1]
+  }
+
+  return routeDemand <= vehicleCapacity
+}
+
+const generateTempRoutes = (route1, route2, node1, node2, vehicleCapacity, inputData) => {
+  // check if sum of demands of customers in the new route can be fulfilled by the vehicle
+  if (!isDeliveryFromDepotFeasible(route1, route2, node1, node2, vehicleCapacity, inputData)) {
+    return null
+  }
   // no match with existing routes
   if (!route1 && !route2) {
     return generateRouteCombinations([node1], [node2])
@@ -100,15 +123,11 @@ const generateTempRoutes = (route1, route2, node1, node2) => {
   return null
 }
 
-const isDeliveryPickupFeasible = (route, inputData) => {
-  return
+const isRouteFeasible = (route, inputData) => {
+   
 }
 
-const isTimeWindowFeasible = (route, inputData) => {
-  return
-}
-
-export const ClarkeWright = (savings, kimtiNodes) => {
+export const ClarkeWright = (savings, kimtiNodes, vehicleCapacity, inputData) => {
   let routes = []
 
   for (let i=0; i<savings.length; i++) {
@@ -127,11 +146,17 @@ export const ClarkeWright = (savings, kimtiNodes) => {
         }
       }
 
-      let routeCombinations = generateTempRoutes(route1, route2, node1, node2)
+      let tempRoutes = generateTempRoutes(route1, route2, node1, node2, vehicleCapacity, inputData)
 
       // check for Delivery and Pickup feasibility for all the generated routes
-      if (routeCombinations) {
-
+      if (tempRoutes) {
+        // NOTE: create a single function to check for feasibility
+        for (let k=0; k<tempRoutes.length; k++) {
+          if (isRouteFeasible(tempRoutes[k], inputData)) {
+            feasibleRoutes.push(tempRoutes[k])
+          }
+        }
+        // Rank all feasible routes and push the best to the routes array
       }
     }
 
