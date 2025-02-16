@@ -4,7 +4,6 @@ export const generateDistanceMatrix = (n, depot, xCoords, yCoords) => {
   const xCoordinates = [depot.x, ...xCoords]
   const yCoordinates = [depot.y, ...yCoords]
   let matrix = Array.from(Array(n+1), () => new Array(n+1).fill(0))
-
   for (let i=0; i<n+1; i++) {
     for (let j=i+1; j<n+1; j++) {
       const distance = Math.sqrt(
@@ -14,7 +13,6 @@ export const generateDistanceMatrix = (n, depot, xCoords, yCoords) => {
       matrix[j][i] = distance
     }
   }
-
   return matrix
 }
 
@@ -144,13 +142,34 @@ const isRouteFeasible = (route, vehicleCapacity, inputData, distanceMatrix, aver
       return false
     }
     // capacity feasibility
-    currentVehicleCap = currentVehicleCap - inputData.demands[node-1] + inputData.pickups[node]
+    currentVehicleCap = currentVehicleCap - inputData.demands[node-1] + inputData.pickups[node-1]
     if (currentVehicleCap > vehicleCapacity) {
       return false
     }
     currentNode = node
   }
   return true
+}
+
+const selectBestRoute = (routes, positions, savings) => {
+  let ranking = []
+  for (const route of routes) {
+    const nodeSet = new Set()
+    nodeSet.add(route[positions[0]])
+    nodeSet.add(route[positions[1]])
+    let saving = null
+    for (let i=0; i<savings.length; i++){
+      if (!saving) {
+        const [node1, node2] = savings[i].pair
+        if (nodeSet.has(node1) && nodeSet.has(node2)) {
+          saving = savings[i].saving
+        }
+      }
+    }
+    ranking.push({ route: route, saving: saving })
+  }
+  ranking.sort((a,b) => b.saving - a.saving)
+  return ranking[0].route
 }
 
 export const ClarkeWright = (
@@ -189,6 +208,7 @@ export const ClarkeWright = (
 
       // check for Delivery and Pickup feasibility for all the generated routes
       if (tempRoutes) {
+        console.log(savings[i].pair, tempRoutes, "t")
         let feasibleRoutes = [];
         // NOTE: create a single function to check for feasibility
         for (let k=0; k<tempRoutes.length; k++) {
@@ -205,10 +225,35 @@ export const ClarkeWright = (
             feasibleRoutes.push(tempRoutes[k])
           }
         }
-        console.log(feasibleRoutes)
         // Rank all feasible routes and push the best to the routes array
+        if (feasibleRoutes.length > 0) {
+          let bestRoute = null
+          // no match with existing routes
+          if (!route1 && !route2) {
+            bestRoute = feasibleRoutes[0]
+          }
+          // match with 1 existing route
+          else if (route1 && !route2) {
+            const n = feasibleRoutes[0].length
+            bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
+          }
+          else if (!route1 && route2) {
+            bestRoute = selectBestRoute(feasibleRoutes, [0, 1], savings)
+          }
+          // match with 2 existing routes
+          else if (route1 !== route2) {
+            const n = feasibleRoutes[0].length/2 // to find the middle two nodes
+            bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
+          }
+          console.log(savings[i].pair, feasibleRoutes, bestRoute)
+          routes.push(bestRoute)
+          // both nodes are part of a route, hence delete it from the set so that it wont be added again to other routes
+          kimtiNodes.delete(node1)
+          kimtiNodes.delete(node2)
+        }
       }
     }
-
   }
+
+  return routes
 }

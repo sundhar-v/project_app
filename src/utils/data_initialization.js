@@ -38,8 +38,8 @@ const generateTimeWindow = (numberOfCustomers, deliveryStart, deliveryEnd) => {
 export const generateRandomData = (numberOfCustomers, vehicleCapacity, deliveryStart, deliveryEnd) => {
   const xCoords = generateRandomArray(numberOfCustomers + 1, 1, 200)
   const yCoords = generateRandomArray(numberOfCustomers + 1, 1, 100)
-  const demands = generateRandomArray(numberOfCustomers, 0, vehicleCapacity)
-  const pickups = generateRandomArray(numberOfCustomers, 0, vehicleCapacity)
+  const demands = generateRandomArray(numberOfCustomers, 0, vehicleCapacity/5)
+  const pickups = generateRandomArray(numberOfCustomers, 0, vehicleCapacity/5)
   const timeWindows = generateTimeWindow(numberOfCustomers, deliveryStart, deliveryEnd)
   const hoverTemplates = generateHoverTemplates(numberOfCustomers, demands, pickups, timeWindows)
 

@@ -21,4 +21,4 @@ export const toastTimer = 2500 // in milliseconds
 
 export const averageVehicleSpeed = 60 // in kmph
 
-export const maximumWaitingTime = 120 // in minutes
+export const maximumWaitingTime = 360 // in minutes

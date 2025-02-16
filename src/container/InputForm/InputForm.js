@@ -59,7 +59,7 @@ const InputForm = ({
               min={1}
               max={100}
               value={numberOfCustomers}
-              onChange={(e) => setNumberOfCustomers(e.target.value)}
+              onChange={(e) => setNumberOfCustomers(Number(e.target.value))}
             />
           </div>
         </div>
@@ -74,7 +74,7 @@ const InputForm = ({
               id="vehiclecap"
               placeholder="e.g: 100"
               value={vehicleCapacity}
-              onChange={(e) => setVehicleCapacity(e.target.value)}
+              onChange={(e) => setVehicleCapacity(Number(e.target.value))}
             />
           </div>
         </div>
