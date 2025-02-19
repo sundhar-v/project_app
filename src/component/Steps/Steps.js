@@ -6,13 +6,16 @@ import ClickMe from "../../assets/click_me.jpg"
 
 import { stepValues } from "../../utils/constants";
 
-const Steps = ({stepNumber, setCurrentStep}) => {
+const Steps = ({stepNumber, setCurrentStep, setInputDataGenerated}) => {
   const navigateStep = (clicked) => {
     if (stepNumber === 1 && clicked !== stepNumber) {
       setCurrentStep(clicked)
     }
     else if (clicked < stepNumber) {
       setCurrentStep(clicked)
+    }
+    if (clicked === 0) {
+      setInputDataGenerated(false)
     }
   }
 

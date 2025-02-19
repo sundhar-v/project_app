@@ -136,9 +136,12 @@ const isRouteFeasible = (route, vehicleCapacity, inputData, distanceMatrix, aver
   let currentNode = 0
   for (const node of route) {
     // Time window feasibility
-    currentTime = currentTime + (distanceMatrix[currentNode][node] / averageVehicleSpeed) * 60
+    currentTime = currentNode !== 0 
+      ? currentTime + (distanceMatrix[currentNode][node] / averageVehicleSpeed) * 60
+      : Math.max(currentTime + (distanceMatrix[currentNode][node] / averageVehicleSpeed) * 60, inputData.timeWindows[node-1][0])
     // if arrival time at node exceeds delivery end or made to wait more than tolerable waiting limit then the route is not feasible
-    if (currentTime > deliveryEnd || (inputData.timeWindows[node-1][0] - currentTime) > maximumWaitingTime) {
+    // excluding this check if current node = 0 (depot)
+    if (currentNode !== 0 && (currentTime > deliveryEnd || (inputData.timeWindows[node-1][0] - currentTime) > maximumWaitingTime)) {
       return false
     }
     // capacity feasibility
@@ -188,6 +191,8 @@ export const ClarkeWright = (
   const dStart = timeStringToMinutes(deliveryStart)
   const dEnd = timeStringToMinutes(deliveryEnd)
 
+  const routeNodes = new Set()
+
   for (let i=0; i<savings.length; i++) {
     const [node1, node2] = savings[i].pair
 
@@ -208,7 +213,6 @@ export const ClarkeWright = (
 
       // check for Delivery and Pickup feasibility for all the generated routes
       if (tempRoutes) {
-        console.log(savings[i].pair, tempRoutes, "t")
         let feasibleRoutes = [];
         // NOTE: create a single function to check for feasibility
         for (let k=0; k<tempRoutes.length; k++) {
@@ -236,24 +240,34 @@ export const ClarkeWright = (
           else if (route1 && !route2) {
             const n = feasibleRoutes[0].length
             bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
+            routes = routes.filter(route => route.toString() !== route1.toString());
           }
           else if (!route1 && route2) {
             bestRoute = selectBestRoute(feasibleRoutes, [0, 1], savings)
+            routes = routes.filter(route => route.toString() !== route2.toString());
           }
           // match with 2 existing routes
           else if (route1 !== route2) {
             const n = feasibleRoutes[0].length/2 // to find the middle two nodes
             bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
+            routes = routes.filter(route => route.toString() !== route1.toString());
+            routes = routes.filter(route => route.toString() !== route2.toString());
           }
-          console.log(savings[i].pair, feasibleRoutes, bestRoute)
           routes.push(bestRoute)
-          // both nodes are part of a route, hence delete it from the set so that it wont be added again to other routes
-          kimtiNodes.delete(node1)
-          kimtiNodes.delete(node2)
+          bestRoute.forEach(node => routeNodes.add(node))
         }
       }
     }
   }
+
+  // Generating routes for customers that cannot be paired with others
+  const leftOverNodes = [...kimtiNodes].filter(node => !routeNodes.has(node))
+  for (const node of leftOverNodes) {
+    routes.push([node])
+  }
+
+  // add depot to start and end of each routes
+  routes = routes.map(route => [0, ...route, 0])
 
   return routes
 }

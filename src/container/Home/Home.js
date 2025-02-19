@@ -31,6 +31,7 @@ const Home = () => {
   const [inputFile, setInputFile] = useState(null);
   const [inputFileValidity, setInputFileValidity] = useState(false);
   const [inputData, setInputData] = useState({});
+  const [inputDataGenerated, setInputDataGenerated] = useState(false);
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
   // const [averageVehicleSpeed] = useState(averageVehicleSpeed);
@@ -44,8 +45,11 @@ const Home = () => {
         console.log(inputFile) // process data using FileReader or external library
       }
       else {
-        const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity, deliveryStart, deliveryEnd)
-        setInputData(data)
+        if (!inputDataGenerated) {
+          const data = generateRandomData(Number(numberOfCustomers), vehicleCapacity, deliveryStart, deliveryEnd)
+          setInputData(data)
+          setInputDataGenerated(true)
+        }
       }
     }
   }, [
@@ -109,6 +113,7 @@ const Home = () => {
     <Steps
       stepNumber={currentStep}
       setCurrentStep={setCurrentStep}
+      setInputDataGenerated={setInputDataGenerated}
     />
     {currentStep === 0 
       ? <Divider
