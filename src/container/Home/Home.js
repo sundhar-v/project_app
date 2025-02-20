@@ -17,6 +17,7 @@ import {
   ClarkeWright
 } from '../../utils/simple_cw';
 import { toastTimer, averageVehicleSpeed, maximumWaitingTime } from '../../utils/constants';
+import { generateOutputPlotData } from '../../utils/functions';
 
 /* eslint-disable */
 const Home = () => {
@@ -34,6 +35,7 @@ const Home = () => {
   const [inputDataGenerated, setInputDataGenerated] = useState(false);
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
+  const [plotData, setPlotData] = useState([]);
   // const [averageVehicleSpeed] = useState(averageVehicleSpeed);
   // const [maximumWaitingTime] = useState(maximumWaitingTime);
 
@@ -91,7 +93,8 @@ const Home = () => {
         deliveryStart,
         deliveryEnd
       )
-      console.log(savings, finalRoutes)
+      const data = generateOutputPlotData(finalRoutes, inputData)
+      setPlotData(data);
     }
   }, [
     currentStep,
@@ -149,7 +152,7 @@ const Home = () => {
       : currentStep === 1
         ? <InputPreview inputData={inputData} />
         : currentStep === 2
-          ? <Output />
+          ? <Output plotData={plotData} />
           : <></>
     }
   </div>

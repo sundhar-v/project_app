@@ -34,8 +34,8 @@ const InputPreview = ({ inputData = {} }) => {
           hovertemplate: inputData.hoverTemplates
         }]}
         layout={{
-          width: 1000,
-          height: 600,
+          width: 1500,
+          height: 1200,
           xaxis: { showgrid: false, zeroline: false, visible: false },
           yaxis: { showgrid: false, zeroline: false, visible: false }
         }}
