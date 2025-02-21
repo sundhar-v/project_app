@@ -4,15 +4,18 @@ import "./Output.css"
 
 import OutputPropTypes from "./Output.propTypes"
 
-const Output = ({ plotData }) => {
+import { useWindowDimensions } from '../../utils/window_dimension';
 
+const Output = ({ plotData }) => {
+  const { height, width } = useWindowDimensions();
+  
   return (
     <div className="outputPlot">
       <Plot
         data={plotData}
         layout={{
-          width: 1500,
-          height: 1200,
+          width: 0.9*width,
+          height: 0.9*height,
           xaxis: { showgrid: false, zeroline: false, visible: false },
           yaxis: { showgrid: false, zeroline: false, visible: false }
         }}

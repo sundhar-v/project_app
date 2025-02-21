@@ -4,8 +4,12 @@ import "./InputPreview.css"
 
 import InputPreviewPropTypes from './InputPreview.propTypes'
 
+import { useWindowDimensions } from '../../utils/window_dimension';
+
 /* eslint-disable */
 const InputPreview = ({ inputData = {} }) => {
+  const { height, width } = useWindowDimensions();
+  
   return Object.keys(inputData).length 
     ? <div className="plotarea">
       <Plot
@@ -34,8 +38,8 @@ const InputPreview = ({ inputData = {} }) => {
           hovertemplate: inputData.hoverTemplates
         }]}
         layout={{
-          width: 1500,
-          height: 1200,
+          width: 0.9*width,
+          height: 0.9*height,
           xaxis: { showgrid: false, zeroline: false, visible: false },
           yaxis: { showgrid: false, zeroline: false, visible: false }
         }}
