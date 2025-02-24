@@ -50,11 +50,48 @@ const isViolatingDeg2Constraint = (node, route) => {
   return idx !== -1 && idx !== 0 && idx !== route.length - 1;
 }
 
-const generateRouteCombinations = (routeA, routeB) => {
+const calculateRouteTotalDemand = (inputList, inputData) => {
+  let routeDemand = 0
+  for (const node of inputList) {
+    routeDemand = routeDemand + inputData.demands[node-1]
+  }
+  return routeDemand
+}
+
+const calculateRouteTotalPickup = (inputList, inputData) => {
+  let routePickup = 0
+  for (const node of inputList) {
+    routePickup = routePickup + inputData.demands[node-1]
+  }
+  return routePickup
+}
+
+const isDeliveryFromDepotFeasible = (route1, route2, vehicleCapacity, inputData) => {
+  // sums the demand and pickup of all the nodes in the new route (order doesn't matter because nodes same across different combinations)
+  // and checks if the vehicle has the capacity to carry the goods to and from the depot
+  let nodes = new Set()
+  if (route1) {
+    route1.forEach(node => nodes.add(node))
+  }
+  if (route2) {
+    route2.forEach(node => nodes.add(node))
+  }
+  
+  const routeDemand = calculateRouteTotalDemand(nodes, inputData)
+  const routePickup = calculateRouteTotalPickup(nodes, inputData)
+  return routeDemand <= vehicleCapacity && routePickup <= vehicleCapacity
+}
+
+const generateRouteCombinations = (routeA, routeB, vehicleCapacity, inputData) => {
+  let routeCombinations = [];
+
+  // check if sum of demands of customers in the new route can be fulfilled by the vehicle
+  if (!isDeliveryFromDepotFeasible(routeA, routeB, vehicleCapacity, inputData)) {
+    return routeCombinations
+  }
+
   const isMultipleNodesInA = routeA.length > 1;
   const isMultipleNodesInB = routeB.length > 1;
-
-  let routeCombinations = [];
 
   // Define route options based on size
   const routesA = isMultipleNodesInA ? [routeA, [...routeA].reverse()] : [routeA];
@@ -73,56 +110,26 @@ const generateRouteCombinations = (routeA, routeB) => {
   return routeCombinations;
 }
 
-const calculateRouteTotalDemand = (inputList, inputData) => {
-  let routeDemand = 0
-  for (const node of inputList) {
-    routeDemand = routeDemand + inputData.demands[node-1]
-  }
-  return routeDemand
-}
-
-const isDeliveryFromDepotFeasible = (route1, route2, node1, node2, vehicleCapacity, inputData) => {
-  // sums the demand of all the nodes in the new route (order doesn't matter because nodes same across different combinations)
-  // and checks if the vehicle has the capacity to carry the goods from the depot
-  let nodes = new Set()
-  nodes.add(node1)
-  nodes.add(node2)
-  if (route1) {
-    route1.forEach(node => nodes.add(node))
-  }
-  if (route2) {
-    route2.forEach(node => nodes.add(node))
-  }
-  
-  const routeDemand = calculateRouteTotalDemand(nodes, inputData)
-
-  return routeDemand <= vehicleCapacity
-}
-
 const generateTempRoutes = (route1, route2, node1, node2, vehicleCapacity, inputData) => {
-  // check if sum of demands of customers in the new route can be fulfilled by the vehicle
-  if (!isDeliveryFromDepotFeasible(route1, route2, node1, node2, vehicleCapacity, inputData)) {
-    return null
-  }
   // no match with existing routes
   if (!route1 && !route2) {
-    return generateRouteCombinations([node1], [node2])
+    return generateRouteCombinations([node1], [node2], vehicleCapacity, inputData)
   }
   // match with 1 existing route
   else if (route1 && !route2) {
     if (!isViolatingDeg2Constraint(node1, route1)) {
-      return generateRouteCombinations(route1, [node2])
+      return generateRouteCombinations(route1, [node2], vehicleCapacity, inputData)
     }
   }
   else if (!route1 && route2) {
     if (!isViolatingDeg2Constraint(node2, route2)){
-      return generateRouteCombinations([node1], route2)
+      return generateRouteCombinations([node1], route2, vehicleCapacity, inputData)
     }
   }
   // match with 2 existing routes
   else if (route1 !== route2) {
     if (!isViolatingDeg2Constraint(node1, route1) && !isViolatingDeg2Constraint(node2, route2)){
-      return generateRouteCombinations(route1, route2)
+      return generateRouteCombinations(route1, route2, vehicleCapacity, inputData)
     }
   }
 
@@ -208,6 +215,8 @@ export const ClarkeWright = (
           route2 = routes[j]
         }
       }
+
+      // Algorithm starts here
 
       let tempRoutes = generateTempRoutes(route1, route2, node1, node2, vehicleCapacity, inputData)
 
