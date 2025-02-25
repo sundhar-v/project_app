@@ -101,9 +101,7 @@ const generateRouteCombinations = (routeA, routeB, vehicleCapacity, inputData) =
   for (const a of routesA) {
     for (const b of routesB) {
       routeCombinations.push([...a, ...b]); // A forward + B forward
-      if (isMultipleNodesInA && isMultipleNodesInB) {
-        routeCombinations.push([...b, ...a]); // B forward + A forward
-      }
+      routeCombinations.push([...b, ...a]); // B forward + A forward
     }
   }
 
@@ -137,7 +135,28 @@ const generateTempRoutes = (route1, route2, node1, node2, vehicleCapacity, input
   return null
 }
 
-const isRouteFeasible = (route, vehicleCapacity, inputData, distanceMatrix, averageVehicleSpeed, maximumWaitingTime, deliveryStart, deliveryEnd) => {
+const computeCostForRoute = (route, distanceMatrix) => {
+  let cost = 0
+  // add the distances between the nodes of the route
+  for (let i=1; i<route.length; i++) {
+    cost = cost + distanceMatrix[route[i-1]][route[i]]
+  }
+  // add distance from depot to first node and distance to depot from last node
+  cost = cost + distanceMatrix[0][route[0]] + distanceMatrix[route[route.length-1]][0]
+
+  return cost
+}
+
+const isRouteFeasible = (
+  route,
+  vehicleCapacity,
+  inputData,
+  distanceMatrix,
+  averageVehicleSpeed,
+  maximumWaitingTime,
+  deliveryStart,
+  deliveryEnd
+) => {
   let currentVehicleCap = calculateRouteTotalDemand(route, inputData)
   let currentTime = deliveryStart
   let currentNode = 0
@@ -194,6 +213,7 @@ export const ClarkeWright = (
   deliveryEnd
 ) => {
   let routes = []
+  let cost = {}
 
   const dStart = timeStringToMinutes(deliveryStart)
   const dEnd = timeStringToMinutes(deliveryEnd)
@@ -222,8 +242,15 @@ export const ClarkeWright = (
 
       // check for Delivery and Pickup feasibility for all the generated routes
       if (tempRoutes) {
+        // compute cost for each of the possible routes
+        for (let k=0; k<tempRoutes.length; k++) {
+          if(!cost[tempRoutes[k]]) {
+            cost[tempRoutes[k]] = computeCostForRoute(tempRoutes[k], distanceMatrix)
+          }
+        }
+
         let feasibleRoutes = [];
-        // NOTE: create a single function to check for feasibility
+        // check for feasibility for each of the possible routes
         for (let k=0; k<tempRoutes.length; k++) {
           if (isRouteFeasible(
             tempRoutes[k],
