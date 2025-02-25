@@ -39,7 +39,7 @@ export const generateSavings = (distance, faltuNodes) => {
       }
     }
   }
-  savings.sort((a,b) => b.saving - a.saving)
+  savings.sort((a,b) => b.saving - a.saving) // descinding order sort
   //console.log(savings)
   return savings
 }
@@ -135,18 +135,6 @@ const generateTempRoutes = (route1, route2, node1, node2, vehicleCapacity, input
   return null
 }
 
-const computeCostForRoute = (route, distanceMatrix) => {
-  let cost = 0
-  // add the distances between the nodes of the route
-  for (let i=1; i<route.length; i++) {
-    cost = cost + distanceMatrix[route[i-1]][route[i]]
-  }
-  // add distance from depot to first node and distance to depot from last node
-  cost = cost + distanceMatrix[0][route[0]] + distanceMatrix[route[route.length-1]][0]
-
-  return cost
-}
-
 const isRouteFeasible = (
   route,
   vehicleCapacity,
@@ -180,24 +168,26 @@ const isRouteFeasible = (
   return true
 }
 
-const selectBestRoute = (routes, positions, savings) => {
+const computeCostForRoute = (route, distanceMatrix) => {
+  let cost = 0
+  // add the distances between the nodes of the route
+  for (let i=1; i<route.length; i++) {
+    cost = cost + distanceMatrix[route[i-1]][route[i]]
+  }
+  // add distance from depot to first node and distance to depot from last node
+  cost = cost + distanceMatrix[0][route[0]] + distanceMatrix[route[route.length-1]][0]
+
+  return cost
+}
+
+const selectBestRoute = (routes, cost, distanceMatrix)  => {
   let ranking = []
   for (const route of routes) {
-    const nodeSet = new Set()
-    nodeSet.add(route[positions[0]])
-    nodeSet.add(route[positions[1]])
-    let saving = null
-    for (let i=0; i<savings.length; i++){
-      if (!saving) {
-        const [node1, node2] = savings[i].pair
-        if (nodeSet.has(node1) && nodeSet.has(node2)) {
-          saving = savings[i].saving
-        }
-      }
-    }
-    ranking.push({ route: route, saving: saving })
+    let routeCost = computeCostForRoute(route, distanceMatrix)
+    cost[route] = routeCost
+    ranking.push({ route: route, routeCost: routeCost })
   }
-  ranking.sort((a,b) => b.saving - a.saving)
+  ranking.sort((a,b) => a.routeCost - b.routeCost) // ascending order sort
   return ranking[0].route
 }
 
@@ -242,13 +232,6 @@ export const ClarkeWright = (
 
       // check for Delivery and Pickup feasibility for all the generated routes
       if (tempRoutes) {
-        // compute cost for each of the possible routes
-        for (let k=0; k<tempRoutes.length; k++) {
-          if(!cost[tempRoutes[k]]) {
-            cost[tempRoutes[k]] = computeCostForRoute(tempRoutes[k], distanceMatrix)
-          }
-        }
-
         let feasibleRoutes = [];
         // check for feasibility for each of the possible routes
         for (let k=0; k<tempRoutes.length; k++) {
@@ -271,26 +254,42 @@ export const ClarkeWright = (
           // no match with existing routes
           if (!route1 && !route2) {
             bestRoute = feasibleRoutes[0]
+
+            routes.push(bestRoute)
+            bestRoute.forEach(node => routeNodes.add(node))
           }
           // match with 1 existing route
           else if (route1 && !route2) {
-            const n = feasibleRoutes[0].length
-            bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
+            bestRoute = selectBestRoute(feasibleRoutes, cost, distanceMatrix)
             routes = routes.filter(route => route.toString() !== route1.toString());
+
+            routes.push(bestRoute)
+            bestRoute.forEach(node => routeNodes.add(node))
           }
           else if (!route1 && route2) {
-            bestRoute = selectBestRoute(feasibleRoutes, [0, 1], savings)
+            bestRoute = selectBestRoute(feasibleRoutes, cost, distanceMatrix)
             routes = routes.filter(route => route.toString() !== route2.toString());
+
+            routes.push(bestRoute)
+            bestRoute.forEach(node => routeNodes.add(node))
           }
           // match with 2 existing routes
           else if (route1 !== route2) {
-            const n = feasibleRoutes[0].length/2 // to find the middle two nodes
-            bestRoute = selectBestRoute(feasibleRoutes, [n-2, n-1], savings)
-            routes = routes.filter(route => route.toString() !== route1.toString());
-            routes = routes.filter(route => route.toString() !== route2.toString());
+            bestRoute = selectBestRoute(feasibleRoutes, cost, distanceMatrix)
+
+            const route1Cost = cost[route1] ? cost[route1] : computeCostForRoute(route1, distanceMatrix)
+            const route2Cost = cost[route2] ? cost[route2] : computeCostForRoute(route2, distanceMatrix)
+            const bestRouteCost = cost[bestRoute] ? cost[bestRoute] : computeCostForRoute(bestRoute, distanceMatrix)
+
+            // proceed with merge only if the merged route cost is less than individual routes
+            if (route1Cost + route2Cost > bestRouteCost) {
+              routes = routes.filter(route => route.toString() !== route1.toString());
+              routes = routes.filter(route => route.toString() !== route2.toString());
+
+              routes.push(bestRoute)
+              bestRoute.forEach(node => routeNodes.add(node))
+            }
           }
-          routes.push(bestRoute)
-          bestRoute.forEach(node => routeNodes.add(node))
         }
       }
     }
