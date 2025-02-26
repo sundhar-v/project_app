@@ -12,7 +12,6 @@ import { useWindowDimensions } from '../../utils/window_dimension';
 const Output = ({ plotData, tableData, finalNumberOfRoutes }) => {
   const { height, width } = useWindowDimensions();
   const [currentRoute, setCurrentRoute] = useState(1);
-  console.log(tableData)
   
   return (
     <>

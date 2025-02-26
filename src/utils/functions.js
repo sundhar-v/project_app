@@ -109,7 +109,7 @@ export const generateOutputTableData = (routes, inputData, distanceMatrix, deliv
     const routeDemand = calculateRouteDemand(route, inputData)
     const routePickup = calculateRoutePickup(route, inputData)
     const nodeData = []
-    const depotData = { "start": dStart }
+    const depotData = { "start": deliveryStart }
 
     let freshUnits = routeDemand
     let staleUnits = 0
