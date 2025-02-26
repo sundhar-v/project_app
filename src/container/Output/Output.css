@@ -7,11 +7,14 @@
 
 .routeNav {
   margin: auto;
-  padding: 30px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .routeDetail {
   width: 75%;
-  padding: 30px;
-  text-align: center;
+  margin: auto;
+  padding-left: 30px;
+  padding-right: 30px;
 }
