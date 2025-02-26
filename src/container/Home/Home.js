@@ -37,6 +37,7 @@ const Home = () => {
   const [toastText, setToastText] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [finalNumberOfRoutes, setFinalNumberOfRoutes] = useState(0);
   // const [averageVehicleSpeed] = useState(averageVehicleSpeed);
   // const [maximumWaitingTime] = useState(maximumWaitingTime);
 
@@ -98,6 +99,7 @@ const Home = () => {
       setPlotData(plotData);
       const tableData = generateOutputTableData(finalRoutes, inputData, distanceMatrix, deliveryStart)
       setTableData(tableData)
+      setFinalNumberOfRoutes(finalRoutes.length)
     }
   }, [
     currentStep,
@@ -155,7 +157,11 @@ const Home = () => {
       : currentStep === 1
         ? <InputPreview inputData={inputData} />
         : currentStep === 2
-          ? <Output plotData={plotData} />
+          ? <Output
+              plotData={plotData}
+              tableData={tableData}
+              finalNumberOfRoutes={finalNumberOfRoutes}
+            />
           : <></>
     }
   </div>

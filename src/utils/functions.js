@@ -34,15 +34,6 @@ const getColorList = (numberOfRoutes) => {
   return colorList
 }
 
-const getRouteHoverTemplate = (route) => {
-  let template = ['Depot <extra></extra>']
-  let temp = ['Depot', ...route, 'Depot']
-  for (let i=0; i<route.length; i++) {
-    template.push(temp.join(' -> ')+' <extra></extra>')
-  }
-  template.push('Depot <extra></extra>')
-  return template
-}
 
 export const generateOutputPlotData = (routes, inputData) => {
   let plotData = []
@@ -55,7 +46,7 @@ export const generateOutputPlotData = (routes, inputData) => {
 
     const xCoordinates = [inputData.depot.x, ...temp.map(node => inputData.xCoords[node-1]), inputData.depot.x]
     const yCoordinates = [inputData.depot.y, ...temp.map(node => inputData.yCoords[node-1]), inputData.depot.y]
-    const hoverTemplates = getRouteHoverTemplate(temp)
+    const hoverTemplates = "Route "+(i+1)+" <extra></extra>"
     
     plotData.push({
       x: xCoordinates,
