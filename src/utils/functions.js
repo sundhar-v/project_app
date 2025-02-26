@@ -1,4 +1,5 @@
-import { outputColorList } from "./constants"
+import { outputColorList, averageVehicleSpeed } from "./constants"
+import { computeCostForRoute } from "./simple_cw"
 
 export const  isValidFileUploaded=(file)=>{
   const validExtensions = ['xls','xlsx','csv']
@@ -84,4 +85,71 @@ export const generateOutputPlotData = (routes, inputData) => {
   })
 
   return plotData
+}
+
+const calculateRouteDemand = (route, inputData) => {
+  let routeDemand = 0
+  for (const node of route) {
+    if (node !== 0) {
+      routeDemand = routeDemand + inputData.demands[node-1]
+    }
+  }
+  return routeDemand
+}
+
+const calculateRoutePickup = (route, inputData) => {
+  let routePickup = 0
+  for (const node of route) {
+    if (node !== 0 ) {
+      routePickup = routePickup + inputData.pickups[node-1]
+    }
+  }
+  return routePickup
+}
+
+export const generateOutputTableData = (routes, inputData, distanceMatrix, deliveryStart) => {
+  let tableData = [];
+  const dStart = timeStringToMinutes(deliveryStart);
+
+  for (const route of routes) {
+    const routeName = [...route]
+    routeName[0] = routeName[routeName.length-1] = "Depot"
+    const routeCost = computeCostForRoute(route, distanceMatrix)
+    const routeDemand = calculateRouteDemand(route, inputData)
+    const routePickup = calculateRoutePickup(route, inputData)
+    const nodeData = []
+
+    let freshUnits = routeDemand
+    let staleUnits = 0
+    let currentDemand = 0
+    let currentPickup = 0
+    let departTime = dStart // from prev node
+    for (let i=1; i<route.length-1; i++) {
+      const nodeName = route[i]
+      freshUnits = freshUnits - currentDemand
+      staleUnits = staleUnits + currentPickup
+      currentDemand = inputData.demands[nodeName-1]
+      currentPickup = inputData.pickups[nodeName-1]
+      const arrivalTime = departTime + (distanceMatrix[route[i-1]][route[i]] / averageVehicleSpeed) * 60
+      departTime = Math.max(departTime + (distanceMatrix[route[i-1]][route[i]] / averageVehicleSpeed) * 60, inputData.timeWindows[nodeName-1][0])
+
+      nodeData.push({
+        nodeName: nodeName,
+        freshUnits: freshUnits,
+        staleUnits: staleUnits,
+        nodeDemand: currentDemand,
+        nodePickup: currentPickup,
+        arrivalTime: timeMinutesToString(arrivalTime)
+      })
+    }
+
+    tableData.push({
+      routeName: routeName,
+      routeCost: routeCost,
+      routeDemand: routeDemand,
+      routePickup: routePickup,
+      nodeData: nodeData
+    })
+  }
+  return tableData
 }

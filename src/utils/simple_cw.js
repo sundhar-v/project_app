@@ -61,7 +61,7 @@ const calculateRouteTotalDemand = (inputList, inputData) => {
 const calculateRouteTotalPickup = (inputList, inputData) => {
   let routePickup = 0
   for (const node of inputList) {
-    routePickup = routePickup + inputData.demands[node-1]
+    routePickup = routePickup + inputData.pickups[node-1]
   }
   return routePickup
 }
@@ -168,7 +168,7 @@ const isRouteFeasible = (
   return true
 }
 
-const computeCostForRoute = (route, distanceMatrix) => {
+export const computeCostForRoute = (route, distanceMatrix) => {
   let cost = 0
   // add the distances between the nodes of the route
   for (let i=1; i<route.length; i++) {
