@@ -72,7 +72,7 @@ export const generateOutputPlotData = (routes, inputData) => {
     marker: { size: 44, color: '#ffb700', symbol: 'octagon' },
     textfont: {color: '#000', family: 'SUSE'},
     hoverlabel: { font: {family: 'SUSE'} },
-    hovertemplate: "(x, y): (%{x}, %{y}) <extra></extra>"
+    hovertemplate: "Depot <extra></extra>"
   })
 
   return plotData

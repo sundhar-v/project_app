@@ -99,6 +99,7 @@ const Home = () => {
       setPlotData(plotData);
       const tableData = generateOutputTableData(finalRoutes, inputData, distanceMatrix, deliveryStart)
       setTableData(tableData)
+      console.log(tableData, finalRoutes)
       setFinalNumberOfRoutes(finalRoutes.length)
     }
   }, [
