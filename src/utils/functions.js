@@ -14,7 +14,7 @@ export const timeStringToMinutes = (time) => {
 
 export const timeMinutesToString = (minutes) => {
   const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
+  const mins = Math.round(minutes % 60);
   return `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
 }
 
@@ -118,6 +118,7 @@ export const generateOutputTableData = (routes, inputData, distanceMatrix, deliv
     const routeDemand = calculateRouteDemand(route, inputData)
     const routePickup = calculateRoutePickup(route, inputData)
     const nodeData = []
+    const depotData = { "start": dStart }
 
     let freshUnits = routeDemand
     let staleUnits = 0
@@ -143,12 +144,15 @@ export const generateOutputTableData = (routes, inputData, distanceMatrix, deliv
       })
     }
 
+    depotData["end"] = timeMinutesToString(departTime + (distanceMatrix[route[route.length-2]][route[route.length-1]] / averageVehicleSpeed) * 60)
+
     tableData.push({
       routeName: routeName,
       routeCost: routeCost,
       routeDemand: routeDemand,
       routePickup: routePickup,
-      nodeData: nodeData
+      nodeData: nodeData,
+      depotData: depotData
     })
   }
   return tableData
