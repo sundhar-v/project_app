@@ -18,6 +18,7 @@ import {
 } from '../../utils/simple_cw';
 import { toastTimer, averageVehicleSpeed, maximumWaitingTime } from '../../utils/constants';
 import { generateOutputPlotData, generateOutputTableData } from '../../utils/functions';
+import { readJSONFile } from '../../utils/file_reader';
 
 /* eslint-disable */
 const Home = () => {
@@ -46,7 +47,7 @@ const Home = () => {
   useEffect(() => {
     if (currentStep === 1) {
       if (jsonInputMode) {
-        console.log(inputFile) // process data using FileReader or external library
+        const data = readJSONFile(inputFile, setInputData)
       }
       else {
         if (!inputDataGenerated) {
