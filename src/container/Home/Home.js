@@ -24,7 +24,7 @@ const Home = () => {
   // Values for current step - 0 [input form]/1 - [input visual]/2 - [output]
   const [currentStep, setCurrentStep] = useState(0);
   // excel mode - true (parse data) ; false (generate random data)
-  const [excelInputMode, setExcelInputMode] = useState(false)
+  const [jsonInputMode, setJSONInputMode] = useState(false)
   const [numberOfCustomers, setNumberOfCustomers] = useState(23);
   const [vehicleCapacity, setVehicleCapacity] = useState(100);
   const [deliveryStart, setDeliveryStart] = useState("00:00");
@@ -45,7 +45,7 @@ const Home = () => {
 
   useEffect(() => {
     if (currentStep === 1) {
-      if (excelInputMode) {
+      if (jsonInputMode) {
         console.log(inputFile) // process data using FileReader or external library
       }
       else {
@@ -58,7 +58,7 @@ const Home = () => {
     }
   }, [
     currentStep,
-    excelInputMode,
+    jsonInputMode,
     numberOfCustomers,
     vehicleCapacity,
     deliveryStart,
@@ -128,7 +128,7 @@ const Home = () => {
         leftColumn={
           <UploadData 
             setCurrentStep={setCurrentStep}
-            setExcelInputMode={setExcelInputMode}
+            setJSONInputMode={setJSONInputMode}
             setInputFile={setInputFile}
             inputFileValidity={inputFileValidity}
             setInputFileValidity={setInputFileValidity}
@@ -140,7 +140,7 @@ const Home = () => {
         rightColumn={
           <InputForm 
             setCurrentStep={setCurrentStep}
-            setExcelInputMode={setExcelInputMode}
+            setJSONInputMode={setJSONInputMode}
             numberOfCustomers={numberOfCustomers}
             setNumberOfCustomers={setNumberOfCustomers}
             vehicleCapacity={vehicleCapacity}

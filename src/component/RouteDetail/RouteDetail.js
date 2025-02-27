@@ -4,7 +4,6 @@ import "./RouteDetail.css"
 import RouteDetailPropTypes from './RouteDetail.propTypes';
 
 const RouteDetail = ({routeData = {}, currentRoute}) => {
-  console.log(routeData)
   return (
     Object.keys(routeData).length 
       ? <>

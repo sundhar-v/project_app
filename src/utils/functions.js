@@ -2,7 +2,7 @@ import { outputColorList, averageVehicleSpeed } from "./constants"
 import { computeCostForRoute } from "./simple_cw"
 
 export const  isValidFileUploaded=(file)=>{
-  const validExtensions = ['xls','xlsx','csv']
+  const validExtensions = ['json']
   const fileExtension = file.name.split('.').pop()
   return validExtensions.includes(fileExtension)
 }

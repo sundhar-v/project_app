@@ -8,7 +8,7 @@ import { minimumDeliveryWindowDuration } from '../../utils/constants';
 
 const InputForm = ({
   setCurrentStep,
-  setExcelInputMode,
+  setJSONInputMode,
   numberOfCustomers,
   setNumberOfCustomers,
   vehicleCapacity,
@@ -36,7 +36,7 @@ const InputForm = ({
       setToastStatus(true)
     } else {
       setCurrentStep(1)
-      setExcelInputMode(false)
+      setJSONInputMode(false)
     }
   }
 

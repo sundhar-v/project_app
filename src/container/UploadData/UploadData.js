@@ -6,7 +6,7 @@ import UploadDataPropTypes from './UploadData.propTypes';
 
 const UploadData = ({ 
   setCurrentStep,
-  setExcelInputMode,
+  setJSONInputMode,
   setInputFile,
   inputFileValidity,
   setInputFileValidity,
@@ -15,7 +15,7 @@ const UploadData = ({
   fileInputRef
 }) => {
   const showErrorToast = () => {
-    setToastText("Unsupported file format. Upload xls/xlsx/csv files.")
+    setToastText("Unsupported file format. Upload JSON files.")
     setToastStatus(true)
   }
 
@@ -35,7 +35,7 @@ const UploadData = ({
   const proceedToPreview = () => {
     if (inputFileValidity) {
       setCurrentStep(1)
-      setExcelInputMode(true)
+      setJSONInputMode(true)
     } else {
       showErrorToast()
     }
