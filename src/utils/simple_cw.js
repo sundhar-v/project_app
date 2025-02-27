@@ -155,7 +155,7 @@ const isRouteFeasible = (
       : Math.max(currentTime + (distanceMatrix[currentNode][node] / averageVehicleSpeed) * 60, inputData.timeWindows[node-1][0])
     // if arrival time at node exceeds delivery end or made to wait more than tolerable waiting limit then the route is not feasible
     // excluding this check if current node = 0 (depot)
-    if (currentNode !== 0 && (currentTime > deliveryEnd || (inputData.timeWindows[node-1][0] - currentTime) > maximumWaitingTime)) {
+    if (currentNode !== 0 && (currentTime > deliveryEnd || (inputData.timeWindows[node-1][0] - currentTime) > maximumWaitingTime || currentTime > inputData.timeWindows[node-1][1])) {
       return false
     }
     // capacity feasibility
