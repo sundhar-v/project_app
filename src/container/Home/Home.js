@@ -16,7 +16,7 @@ import {
   generateSavings,
   ClarkeWright
 } from '../../utils/simple_cw';
-import { toastTimer, averageVehicleSpeed, maximumWaitingTime } from '../../utils/constants';
+import { toastTimer } from '../../utils/constants';
 import { generateOutputPlotData, generateOutputTableData } from '../../utils/functions';
 import { readJSONFile } from '../../utils/file_reader';
 
@@ -39,15 +39,15 @@ const Home = () => {
   const [plotData, setPlotData] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [finalNumberOfRoutes, setFinalNumberOfRoutes] = useState(0);
-  // const [averageVehicleSpeed] = useState(averageVehicleSpeed);
-  // const [maximumWaitingTime] = useState(maximumWaitingTime);
+  const [averageVehicleSpeed, setAverageVehicleSpeed] = useState(60);
+  const [maximumWaitingTime, setMaximumWaitingTime] = useState(Infinity);
 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (currentStep === 1) {
       if (jsonInputMode) {
-        const data = readJSONFile(inputFile, setInputData)
+        readJSONFile(inputFile, setInputData)
       }
       else {
         if (!inputDataGenerated) {
@@ -66,6 +66,14 @@ const Home = () => {
     deliveryEnd,
     inputFile
   ])
+
+  useEffect(() => {
+    if (jsonInputMode) {
+      // save the results from file to new variable
+      // parse inputData and update it
+    }
+  }, [inputData, jsonInputMode])
+
 
   useEffect(() => {
     if(fileInputRef.current && inputFile) {
