@@ -40,7 +40,6 @@ export const generateSavings = (distance, faltuNodes) => {
     }
   }
   savings.sort((a,b) => b.saving - a.saving) // descinding order sort
-  //console.log(savings)
   return savings
 }
 

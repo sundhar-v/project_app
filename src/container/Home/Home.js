@@ -9,14 +9,20 @@ import UploadData from '../UploadData/UploadData';
 import InputPreview from '../InputPreview/InputPreview';
 import Output from '../Output/Output';
 
-import { generateRandomData } from '../../utils/data_initialization';
+import { generateDataFromJSON, generateRandomData } from '../../utils/data_initialization';
 import { 
   generateDistanceMatrix,
   generateNodesList,
   generateSavings,
   ClarkeWright
 } from '../../utils/simple_cw';
-import { toastTimer } from '../../utils/constants';
+import { 
+  toastTimer,
+  vehicleCapacity as vc,
+  averageVehicleSpeed as av,
+  maximumWaitingTime as mwt,
+  numberOfCustomers as nc
+} from '../../utils/constants';
 import { generateOutputPlotData, generateOutputTableData } from '../../utils/functions';
 import { readJSONFile } from '../../utils/file_reader';
 
@@ -26,28 +32,29 @@ const Home = () => {
   const [currentStep, setCurrentStep] = useState(0);
   // excel mode - true (parse data) ; false (generate random data)
   const [jsonInputMode, setJSONInputMode] = useState(false)
-  const [numberOfCustomers, setNumberOfCustomers] = useState(23);
-  const [vehicleCapacity, setVehicleCapacity] = useState(100);
+  const [numberOfCustomers, setNumberOfCustomers] = useState(nc);
+  const [vehicleCapacity, setVehicleCapacity] = useState(vc);
   const [deliveryStart, setDeliveryStart] = useState("00:00");
   const [deliveryEnd, setDeliveryEnd] = useState("23:59");
   const [inputFile, setInputFile] = useState(null);
   const [inputFileValidity, setInputFileValidity] = useState(false);
   const [inputData, setInputData] = useState({});
   const [inputDataGenerated, setInputDataGenerated] = useState(false);
+  const [jsonData, setJSONData] = useState({});
   const [toastStatus, setToastStatus] = useState(false);
   const [toastText, setToastText] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [finalNumberOfRoutes, setFinalNumberOfRoutes] = useState(0);
-  const [averageVehicleSpeed, setAverageVehicleSpeed] = useState(60);
-  const [maximumWaitingTime, setMaximumWaitingTime] = useState(Infinity);
+  const [averageVehicleSpeed, setAverageVehicleSpeed] = useState(av);
+  const [maximumWaitingTime, setMaximumWaitingTime] = useState(mwt);
 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (currentStep === 1) {
       if (jsonInputMode) {
-        readJSONFile(inputFile, setInputData)
+        readJSONFile(inputFile, setJSONData)
       }
       else {
         if (!inputDataGenerated) {
@@ -68,11 +75,17 @@ const Home = () => {
   ])
 
   useEffect(() => {
-    if (jsonInputMode) {
-      // save the results from file to new variable
-      // parse inputData and update it
+    if (jsonInputMode && Object.keys(jsonData).length) {
+      const output = generateDataFromJSON(jsonData);
+      setNumberOfCustomers(output["numberOfCustomers"])
+      setVehicleCapacity(output["vehicleCapacity"])
+      setMaximumWaitingTime(output["maximumWaitingTime"])
+      setAverageVehicleSpeed(output["averageVehicleSpeed"])
+      setDeliveryStart(output["deliveryStart"])
+      setDeliveryEnd(output["deliveryEnd"])
+      setInputData(output["inputData"])
     }
-  }, [inputData, jsonInputMode])
+  }, [jsonData, jsonInputMode])
 
 
   useEffect(() => {

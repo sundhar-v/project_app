@@ -15,9 +15,13 @@ export const PAGE_DETAIL = [
 
 export const stepValues = ["Enter Input", "Input Preview", "Output"];
 
-export const minimumDeliveryWindowDuration = 120 // in minutes
+export const minimumDeliveryWindowDuration = 120 // in minutes, for random data generation only
 
 export const toastTimer = 2500 // in milliseconds
+
+export const numberOfCustomers = 23
+
+export const vehicleCapacity = 100
 
 export const averageVehicleSpeed = 60 // in kmph
 

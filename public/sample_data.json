@@ -1,8 +1,8 @@
 {
   "variables": {
-    "vehicleCapacity": "100",
+    "vehicleCapacity": "120",
     "maximumWaitingTime": "Infinity",
-    "averageVehicleSpeed": "60"
+    "averageVehicleSpeed": "55"
   },
   "depot": {
     "x": "100",
@@ -15,7 +15,7 @@
       "x": 128,
       "y": 84,
       "demand": 15,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "12:19",
         "18:45"
@@ -25,7 +25,7 @@
       "x": 47,
       "y": 62,
       "demand": 0,
-      "pickups": 7,
+      "pickup": 7,
       "timeWindow": [
         "11:36",
         "20:23"
@@ -35,7 +35,7 @@
       "x": 200,
       "y": 57,
       "demand": 18,
-      "pickups": 5,
+      "pickup": 5,
       "timeWindow": [
         "18:31",
         "21:55"
@@ -45,7 +45,7 @@
       "x": 157,
       "y": 92,
       "demand": 8,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "20:47",
         "23:33"
@@ -55,7 +55,7 @@
       "x": 12,
       "y": 18,
       "demand": 13,
-      "pickups": 20,
+      "pickup": 20,
       "timeWindow": [
         "10:57",
         "17:20"
@@ -65,7 +65,7 @@
       "x": 64,
       "y": 66,
       "demand": 3,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "07:15",
         "16:57"
@@ -75,7 +75,7 @@
       "x": 41,
       "y": 55,
       "demand": 16,
-      "pickups": 16,
+      "pickup": 16,
       "timeWindow": [
         "20:42",
         "22:58"
@@ -85,7 +85,7 @@
       "x": 108,
       "y": 27,
       "demand": 0,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "15:53",
         "20:07"
@@ -95,7 +95,7 @@
       "x": 62,
       "y": 63,
       "demand": 0,
-      "pickups": 18,
+      "pickup": 18,
       "timeWindow": [
         "19:17",
         "22:41"
@@ -105,7 +105,7 @@
       "x": 132,
       "y": 70,
       "demand": 20,
-      "pickups": 10,
+      "pickup": 10,
       "timeWindow": [
         "10:57",
         "13:45"
@@ -115,7 +115,7 @@
       "x": 131,
       "y": 56,
       "demand": 10,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "12:49",
         "18:44"
@@ -125,7 +125,7 @@
       "x": 35,
       "y": 9,
       "demand": 7,
-      "pickups": 14,
+      "pickup": 14,
       "timeWindow": [
         "15:00",
         "22:18"
@@ -135,7 +135,7 @@
       "x": 77,
       "y": 62,
       "demand": 5,
-      "pickups": 1,
+      "pickup": 1,
       "timeWindow": [
         "06:19",
         "12:32"
@@ -145,7 +145,7 @@
       "x": 164,
       "y": 17,
       "demand": 12,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "20:20",
         "23:21"
@@ -155,7 +155,7 @@
       "x": 68,
       "y": 66,
       "demand": 16,
-      "pickups": 19,
+      "pickup": 19,
       "timeWindow": [
         "06:33",
         "10:33"
@@ -165,7 +165,7 @@
       "x": 178,
       "y": 89,
       "demand": 8,
-      "pickups": 7,
+      "pickup": 7,
       "timeWindow": [
         "19:03",
         "23:08"
@@ -175,7 +175,7 @@
       "x": 140,
       "y": 37,
       "demand": 4,
-      "pickups": 20,
+      "pickup": 20,
       "timeWindow": [
         "07:11",
         "10:10"
@@ -185,7 +185,7 @@
       "x": 131,
       "y": 60,
       "demand": 10,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "10:53",
         "14:48"
@@ -195,7 +195,7 @@
       "x": 127,
       "y": 22,
       "demand": 17,
-      "pickups": 5,
+      "pickup": 5,
       "timeWindow": [
         "02:36",
         "09:07"
@@ -205,7 +205,7 @@
       "x": 41,
       "y": 46,
       "demand": 16,
-      "pickups": 16,
+      "pickup": 16,
       "timeWindow": [
         "21:27",
         "23:52"
@@ -215,7 +215,7 @@
       "x": 37,
       "y": 44,
       "demand": 13,
-      "pickups": 1,
+      "pickup": 1,
       "timeWindow": [
         "05:19",
         "11:59"
@@ -225,7 +225,7 @@
       "x": 161,
       "y": 27,
       "demand": 10,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "17:46",
         "19:48"
@@ -235,7 +235,7 @@
       "x": 82,
       "y": 49,
       "demand": 18,
-      "pickups": 16,
+      "pickup": 16,
       "timeWindow": [
         "15:25",
         "23:40"
@@ -245,7 +245,7 @@
       "x": 27,
       "y": 4,
       "demand": 17,
-      "pickups": 1,
+      "pickup": 1,
       "timeWindow": [
         "09:05",
         "19:25"
@@ -255,7 +255,7 @@
       "x": 50,
       "y": 28,
       "demand": 3,
-      "pickups": 19,
+      "pickup": 19,
       "timeWindow": [
         "21:03",
         "23:08"
@@ -265,7 +265,7 @@
       "x": 99,
       "y": 56,
       "demand": 17,
-      "pickups": 20,
+      "pickup": 20,
       "timeWindow": [
         "04:05",
         "18:29"
@@ -275,7 +275,7 @@
       "x": 124,
       "y": 10,
       "demand": 19,
-      "pickups": 18,
+      "pickup": 18,
       "timeWindow": [
         "02:51",
         "04:51"
@@ -285,7 +285,7 @@
       "x": 195,
       "y": 96,
       "demand": 13,
-      "pickups": 17,
+      "pickup": 17,
       "timeWindow": [
         "01:36",
         "19:38"
@@ -295,7 +295,7 @@
       "x": 39,
       "y": 87,
       "demand": 4,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "20:13",
         "22:53"
@@ -305,7 +305,7 @@
       "x": 153,
       "y": 12,
       "demand": 11,
-      "pickups": 10,
+      "pickup": 10,
       "timeWindow": [
         "00:49",
         "12:44"
@@ -315,7 +315,7 @@
       "x": 62,
       "y": 10,
       "demand": 16,
-      "pickups": 5,
+      "pickup": 5,
       "timeWindow": [
         "01:07",
         "06:23"
@@ -325,7 +325,7 @@
       "x": 66,
       "y": 3,
       "demand": 7,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "03:49",
         "14:22"
@@ -335,7 +335,7 @@
       "x": 117,
       "y": 21,
       "demand": 17,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "19:53",
         "22:30"
@@ -345,7 +345,7 @@
       "x": 194,
       "y": 42,
       "demand": 7,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "04:50",
         "23:08"
@@ -355,7 +355,7 @@
       "x": 108,
       "y": 34,
       "demand": 14,
-      "pickups": 4,
+      "pickup": 4,
       "timeWindow": [
         "11:07",
         "14:32"
@@ -365,7 +365,7 @@
       "x": 19,
       "y": 87,
       "demand": 17,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "05:32",
         "14:53"
@@ -375,7 +375,7 @@
       "x": 70,
       "y": 19,
       "demand": 10,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "10:06",
         "21:06"
@@ -385,7 +385,7 @@
       "x": 192,
       "y": 32,
       "demand": 12,
-      "pickups": 4,
+      "pickup": 4,
       "timeWindow": [
         "14:34",
         "18:20"
@@ -395,7 +395,7 @@
       "x": 177,
       "y": 41,
       "demand": 0,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "04:08",
         "09:57"
@@ -405,7 +405,7 @@
       "x": 33,
       "y": 84,
       "demand": 19,
-      "pickups": 6,
+      "pickup": 6,
       "timeWindow": [
         "03:38",
         "08:41"
@@ -415,7 +415,7 @@
       "x": 198,
       "y": 1,
       "demand": 8,
-      "pickups": 10,
+      "pickup": 10,
       "timeWindow": [
         "18:50",
         "22:11"
@@ -425,7 +425,7 @@
       "x": 106,
       "y": 14,
       "demand": 9,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "19:36",
         "22:06"
@@ -435,7 +435,7 @@
       "x": 88,
       "y": 24,
       "demand": 1,
-      "pickups": 14,
+      "pickup": 14,
       "timeWindow": [
         "00:41",
         "21:41"
@@ -445,7 +445,7 @@
       "x": 26,
       "y": 82,
       "demand": 20,
-      "pickups": 4,
+      "pickup": 4,
       "timeWindow": [
         "18:17",
         "22:19"
@@ -455,7 +455,7 @@
       "x": 23,
       "y": 50,
       "demand": 13,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "03:03",
         "20:34"
@@ -465,7 +465,7 @@
       "x": 67,
       "y": 88,
       "demand": 4,
-      "pickups": 4,
+      "pickup": 4,
       "timeWindow": [
         "01:04",
         "03:18"
@@ -475,7 +475,7 @@
       "x": 81,
       "y": 53,
       "demand": 6,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "15:59",
         "19:05"
@@ -485,7 +485,7 @@
       "x": 53,
       "y": 74,
       "demand": 11,
-      "pickups": 19,
+      "pickup": 19,
       "timeWindow": [
         "16:26",
         "21:50"
@@ -495,7 +495,7 @@
       "x": 29,
       "y": 36,
       "demand": 14,
-      "pickups": 19,
+      "pickup": 19,
       "timeWindow": [
         "04:39",
         "13:11"
@@ -505,7 +505,7 @@
       "x": 53,
       "y": 86,
       "demand": 17,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "10:11",
         "12:42"
@@ -515,7 +515,7 @@
       "x": 83,
       "y": 6,
       "demand": 11,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "20:50",
         "23:57"
@@ -525,7 +525,7 @@
       "x": 142,
       "y": 97,
       "demand": 20,
-      "pickups": 17,
+      "pickup": 17,
       "timeWindow": [
         "12:05",
         "18:35"
@@ -535,7 +535,7 @@
       "x": 167,
       "y": 17,
       "demand": 17,
-      "pickups": 20,
+      "pickup": 20,
       "timeWindow": [
         "15:45",
         "19:11"
@@ -545,7 +545,7 @@
       "x": 194,
       "y": 9,
       "demand": 13,
-      "pickups": 15,
+      "pickup": 15,
       "timeWindow": [
         "10:55",
         "18:39"
@@ -555,7 +555,7 @@
       "x": 25,
       "y": 92,
       "demand": 7,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "03:25",
         "19:42"
@@ -565,7 +565,7 @@
       "x": 50,
       "y": 81,
       "demand": 17,
-      "pickups": 19,
+      "pickup": 19,
       "timeWindow": [
         "16:13",
         "23:12"
@@ -575,7 +575,7 @@
       "x": 161,
       "y": 89,
       "demand": 3,
-      "pickups": 8,
+      "pickup": 8,
       "timeWindow": [
         "08:49",
         "18:51"
@@ -585,7 +585,7 @@
       "x": 111,
       "y": 34,
       "demand": 1,
-      "pickups": 15,
+      "pickup": 15,
       "timeWindow": [
         "06:01",
         "16:49"
@@ -595,7 +595,7 @@
       "x": 166,
       "y": 30,
       "demand": 13,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "12:41",
         "18:00"
@@ -605,7 +605,7 @@
       "x": 137,
       "y": 8,
       "demand": 17,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "01:42",
         "21:13"
@@ -615,7 +615,7 @@
       "x": 79,
       "y": 27,
       "demand": 6,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "15:39",
         "18:48"
@@ -625,7 +625,7 @@
       "x": 58,
       "y": 49,
       "demand": 0,
-      "pickups": 7,
+      "pickup": 7,
       "timeWindow": [
         "02:09",
         "23:48"
@@ -635,7 +635,7 @@
       "x": 5,
       "y": 81,
       "demand": 9,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "17:38",
         "20:56"
@@ -645,7 +645,7 @@
       "x": 188,
       "y": 14,
       "demand": 10,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "12:50",
         "15:03"
@@ -655,7 +655,7 @@
       "x": 60,
       "y": 57,
       "demand": 8,
-      "pickups": 1,
+      "pickup": 1,
       "timeWindow": [
         "09:52",
         "20:50"
@@ -665,7 +665,7 @@
       "x": 142,
       "y": 28,
       "demand": 20,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "12:48",
         "15:48"
@@ -675,7 +675,7 @@
       "x": 182,
       "y": 84,
       "demand": 14,
-      "pickups": 14,
+      "pickup": 14,
       "timeWindow": [
         "09:17",
         "12:04"
@@ -685,7 +685,7 @@
       "x": 120,
       "y": 26,
       "demand": 11,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "05:41",
         "23:06"
@@ -695,7 +695,7 @@
       "x": 150,
       "y": 6,
       "demand": 9,
-      "pickups": 18,
+      "pickup": 18,
       "timeWindow": [
         "07:24",
         "13:03"
@@ -705,7 +705,7 @@
       "x": 136,
       "y": 65,
       "demand": 20,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "03:29",
         "12:42"
@@ -715,7 +715,7 @@
       "x": 17,
       "y": 67,
       "demand": 20,
-      "pickups": 6,
+      "pickup": 6,
       "timeWindow": [
         "10:16",
         "18:30"
@@ -725,7 +725,7 @@
       "x": 51,
       "y": 1,
       "demand": 14,
-      "pickups": 5,
+      "pickup": 5,
       "timeWindow": [
         "00:51",
         "06:27"
@@ -735,7 +735,7 @@
       "x": 124,
       "y": 99,
       "demand": 3,
-      "pickups": 2,
+      "pickup": 2,
       "timeWindow": [
         "15:52",
         "23:14"
@@ -745,7 +745,7 @@
       "x": 153,
       "y": 26,
       "demand": 7,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "20:13",
         "23:01"
@@ -755,7 +755,7 @@
       "x": 146,
       "y": 14,
       "demand": 20,
-      "pickups": 13,
+      "pickup": 13,
       "timeWindow": [
         "14:24",
         "16:48"
@@ -765,7 +765,7 @@
       "x": 123,
       "y": 75,
       "demand": 19,
-      "pickups": 18,
+      "pickup": 18,
       "timeWindow": [
         "20:43",
         "23:40"
@@ -775,7 +775,7 @@
       "x": 92,
       "y": 42,
       "demand": 11,
-      "pickups": 7,
+      "pickup": 7,
       "timeWindow": [
         "17:47",
         "21:34"
@@ -785,7 +785,7 @@
       "x": 74,
       "y": 69,
       "demand": 11,
-      "pickups": 4,
+      "pickup": 4,
       "timeWindow": [
         "01:40",
         "05:29"
@@ -795,7 +795,7 @@
       "x": 155,
       "y": 85,
       "demand": 7,
-      "pickups": 5,
+      "pickup": 5,
       "timeWindow": [
         "08:51",
         "20:03"
@@ -805,7 +805,7 @@
       "x": 20,
       "y": 59,
       "demand": 7,
-      "pickups": 17,
+      "pickup": 17,
       "timeWindow": [
         "11:21",
         "18:11"
@@ -815,7 +815,7 @@
       "x": 50,
       "y": 19,
       "demand": 11,
-      "pickups": 14,
+      "pickup": 14,
       "timeWindow": [
         "02:40",
         "17:50"
@@ -825,7 +825,7 @@
       "x": 72,
       "y": 60,
       "demand": 18,
-      "pickups": 2,
+      "pickup": 2,
       "timeWindow": [
         "04:23",
         "09:50"
@@ -835,7 +835,7 @@
       "x": 122,
       "y": 49,
       "demand": 5,
-      "pickups": 16,
+      "pickup": 16,
       "timeWindow": [
         "18:49",
         "22:53"
@@ -845,7 +845,7 @@
       "x": 10,
       "y": 51,
       "demand": 13,
-      "pickups": 10,
+      "pickup": 10,
       "timeWindow": [
         "07:00",
         "09:16"
@@ -855,7 +855,7 @@
       "x": 166,
       "y": 76,
       "demand": 14,
-      "pickups": 6,
+      "pickup": 6,
       "timeWindow": [
         "18:58",
         "23:13"
@@ -865,7 +865,7 @@
       "x": 35,
       "y": 55,
       "demand": 12,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "10:42",
         "21:26"
@@ -875,7 +875,7 @@
       "x": 86,
       "y": 32,
       "demand": 7,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "19:39",
         "22:40"
@@ -885,7 +885,7 @@
       "x": 8,
       "y": 67,
       "demand": 14,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "09:27",
         "22:13"
@@ -895,7 +895,7 @@
       "x": 1,
       "y": 1,
       "demand": 19,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "13:31",
         "21:17"
@@ -905,7 +905,7 @@
       "x": 119,
       "y": 56,
       "demand": 4,
-      "pickups": 9,
+      "pickup": 9,
       "timeWindow": [
         "09:46",
         "22:26"
@@ -915,7 +915,7 @@
       "x": 59,
       "y": 18,
       "demand": 14,
-      "pickups": 12,
+      "pickup": 12,
       "timeWindow": [
         "19:17",
         "23:37"
@@ -925,7 +925,7 @@
       "x": 160,
       "y": 8,
       "demand": 18,
-      "pickups": 2,
+      "pickup": 2,
       "timeWindow": [
         "03:00",
         "05:09"
@@ -935,7 +935,7 @@
       "x": 177,
       "y": 37,
       "demand": 5,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "21:29",
         "23:50"
@@ -945,7 +945,7 @@
       "x": 165,
       "y": 25,
       "demand": 17,
-      "pickups": 17,
+      "pickup": 17,
       "timeWindow": [
         "12:53",
         "22:02"
@@ -955,7 +955,7 @@
       "x": 139,
       "y": 24,
       "demand": 0,
-      "pickups": 8,
+      "pickup": 8,
       "timeWindow": [
         "19:35",
         "21:45"
@@ -965,7 +965,7 @@
       "x": 1,
       "y": 18,
       "demand": 5,
-      "pickups": 18,
+      "pickup": 18,
       "timeWindow": [
         "01:25",
         "15:36"
@@ -975,7 +975,7 @@
       "x": 197,
       "y": 18,
       "demand": 15,
-      "pickups": 0,
+      "pickup": 0,
       "timeWindow": [
         "07:08",
         "16:09"
@@ -985,7 +985,7 @@
       "x": 17,
       "y": 61,
       "demand": 10,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "05:58",
         "14:24"
@@ -995,7 +995,7 @@
       "x": 175,
       "y": 91,
       "demand": 2,
-      "pickups": 11,
+      "pickup": 11,
       "timeWindow": [
         "09:30",
         "20:55"
@@ -1005,7 +1005,7 @@
       "x": 198,
       "y": 65,
       "demand": 12,
-      "pickups": 3,
+      "pickup": 3,
       "timeWindow": [
         "17:32",
         "21:28"

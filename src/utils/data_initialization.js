@@ -1,5 +1,10 @@
 import { timeStringToMinutes, timeMinutesToString } from "./functions";
-import { minimumDeliveryWindowDuration } from "./constants";
+import { 
+  minimumDeliveryWindowDuration,
+  averageVehicleSpeed as av,
+  maximumWaitingTime as mwt,
+  vehicleCapacity as vc
+} from "./constants";
 
 const generateRandomArray = (n, min, max) => Array.from(
   { length: n }, 
@@ -51,5 +56,45 @@ export const generateRandomData = (numberOfCustomers, vehicleCapacity, deliveryS
     pickups,
     hoverTemplates,
     timeWindows
+  }
+}
+
+export const generateDataFromJSON = (jsonData) => {
+  let xCoords = []
+  let yCoords = []
+  let demands = []
+  let pickups = []
+  let timeWindows = []
+  let hoverTemplates = []
+
+  const { variables = {}, depot = {}, customers = []} = jsonData;
+  const { vehicleCapacity = vc, maximumWaitingTime = mwt, averageVehicleSpeed = av } = variables;
+
+  for (const customer of customers) {
+    const { x, y, demand, pickup, timeWindow } = customer
+    xCoords.push(Number(x))
+    yCoords.push(Number(y))
+    demands.push(Number(demand))
+    pickups.push(Number(pickup))
+    timeWindows.push([timeStringToMinutes(timeWindow[0]),timeStringToMinutes(timeWindow[1])])
+    hoverTemplates.push("(x, y): (%{x}, %{y})<br>Demand: "+demand+"<br>Pickup: "+pickup+"<br>Time: "+timeWindow[0]+" - "+timeWindow[1]+"<extra></extra>")
+  }
+
+  return {
+    numberOfCustomers: customers.length,
+    vehicleCapacity: Number(vehicleCapacity),
+    maximumWaitingTime: Number(maximumWaitingTime),
+    averageVehicleSpeed: Number(averageVehicleSpeed),
+    deliveryStart: depot["deliveryStart"],
+    deliveryEnd: depot["deliveryEnd"],
+    inputData: {
+      depot: {x: Number(depot["x"]), y: Number(depot["y"])},
+      xCoords,
+      yCoords,
+      demands,
+      pickups,
+      hoverTemplates,
+      timeWindows
+    }
   }
 }
