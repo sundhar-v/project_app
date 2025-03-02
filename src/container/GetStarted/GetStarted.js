@@ -65,7 +65,7 @@ const GetStarted = () => {
           <img src={JSONImage} alt="JSON" height={"50px"} width={"50px"} />
         </div>
         <div className="tile-content">
-          <p className="tile-title"><b>Sample Data 2</b></p>
+          <p className="tile-title"><b>Sample Data 3</b></p>
           <p className="tile-subtitle">
             Data defined for 7 Customers.
           </p>
