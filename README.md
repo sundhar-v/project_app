@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# **Vehicle Routing with Time Window Constraints**
+## About the Problem
+The Vehicle Routing Problem with Simultaneous Pickup and Delivery with Time Windows (VRPSPD-TW) is an optimization problem that arises in logistics and transportation, where a fleet of vehicles must serve a set of customers with both delivery and pickup demands. Each vehicle has limited capacity, and customers have specific time windows during which they must be served. Additionally, the vehicles must optimize routes to minimize the total distance traveled while ensuring that deliveries and pickups are completed simultaneously without exceeding capacity limits.
+## What is the use of the Application
+Using the application, users can find and visualize the routes for their own data set in `.json` format or utilize the random data generator to create a random data set and study the optimized routes.
+## Live Application URL
+The application has been deployed in this URL - [https://sundhar-v.github.io/project_app](https://sundhar-v.github.io/project_app)
+## Prerequisites
+### Install Node JS
+Refer to  [https://nodejs.org/en/](https://nodejs.org/en/)  to install nodejs.
+## Cloning and Running the Application in local
+Clone the project
+```bash
+git clone https://github.com/sundhar-v/project_app.git
+```
+Go to the project directory
+```bash
+cd project_app
+```
+Install dependencies
+```bash
+npm install
+```
+Start the server
+```bash
+npm run start
+```
+The Application Runs on **localhost:3000**
+## Deploy the application in Github Pages
+```
+npm run predeploy
+npm run deploy
+```
+## Application design
+In the repository, the files involved in development of the application is in the `src` folder.
+The structure of the `src` folder is as follows:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 1. `assets` folder contains all the static elements such as images and data sets.
+ 2. `component` and `container` folders contains the React components and containers.
+ 3. `utils` folder contains the helper function and the modified Clarke-Wirght Algorithm file.
+## Component Tree
+```
+📦index.js
+┣ 📂AppHeader
+┃ ┗ 📂Header
+┗ 📂MasterContainer
+┃ ┣ 📂Home
+┃ ┃ ┣ 📂UploadData
+┃ ┃ ┣ 📂InputForm
+┃ ┃ ┣ 📂InputPreview
+┃ ┃ ┃ ┗ 📂Plot
+┃ ┃ ┗ 📂Output
+┃ ┃ ┃ ┣ 📂Plot
+┃ ┃ ┃ ┣ 📂RouteNav
+┃ ┃ ┃ ┗ 📂RouteDetail
+┃ ┣ 📂GetStarted
+┃ ┗ 📂About
+```
+## Component Folder Structure
+Each component folder will have at most three files - JS File, Proptype file, CSS file.
+```
+📂Header  
+┣ 📜Header.css  
+┣ 📜Header.js  
+┗ 📜Header.propTypes.js
+```

@@ -21,13 +21,13 @@ const GetStarted = () => {
 
   return (
     <div className='getStarted'>
-      <h4>Sample Files</h4>
+      <h4>Sample Data Sets</h4>
       <div className="tile files">
         <div className="tile-icon">
           <img src={JSONImage} alt="JSON" height={"50px"} width={"50px"} />
         </div>
         <div className="tile-content">
-          <p className="tile-title"><b>Sample Data 1</b></p>
+          <p className="tile-title"><b>Data Set 1</b></p>
           <p className="tile-subtitle">
             Data defined for 23 Customers and all additional variables.
           </p>
@@ -46,7 +46,7 @@ const GetStarted = () => {
           <img src={JSONImage} alt="JSON" height={"50px"} width={"50px"} />
         </div>
         <div className="tile-content">
-          <p className="tile-title"><b>Sample Data 2</b></p>
+          <p className="tile-title"><b>Data Set 2</b></p>
           <p className="tile-subtitle">
             Data defined for 100 Customers and all additional variables.
           </p>
@@ -65,7 +65,7 @@ const GetStarted = () => {
           <img src={JSONImage} alt="JSON" height={"50px"} width={"50px"} />
         </div>
         <div className="tile-content">
-          <p className="tile-title"><b>Sample Data 3</b></p>
+          <p className="tile-title"><b>Data Set 3</b></p>
           <p className="tile-subtitle">
             Data defined for 7 Customers.
           </p>
