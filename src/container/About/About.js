@@ -1,7 +1,7 @@
 import React from 'react';
 import "./About.css"
 
-import LinkedIn from "../../assets/linkedin-logo-linkedin-icon-transparent-free-png.webp"
+import LinkedIn from "../../assets/linkedin-logo.webp"
 import GitHub from "../../assets/github-logo.png"
 import Ira from "../../assets/p23ira.JPG"
 import Sundhar from "../../assets/p23Sundhar V-min.JPG"
