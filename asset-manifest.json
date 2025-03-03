@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/project_app/static/css/main.1e3c82f6.css",
-    "main.js": "/project_app/static/js/main.94d1b0bc.js",
+    "main.js": "/project_app/static/js/main.27deae98.js",
     "static/media/p23ira.JPG": "/project_app/static/media/p23ira.e1e5ace87a3889a02878.JPG",
     "static/media/p23Sundhar V-min.JPG": "/project_app/static/media/p23Sundhar V-min.fa27fdc98b30599d008c.JPG",
     "static/media/IIMA_NewLOGO.jpg": "/project_app/static/media/IIMA_NewLOGO.08e3f51984d464dcdf9a.jpg",
@@ -10,10 +10,10 @@
     "static/media/linkedin-logo.webp": "/project_app/static/media/linkedin-logo.fe4dbe4730a4a1fd82cf.webp",
     "index.html": "/project_app/index.html",
     "main.1e3c82f6.css.map": "/project_app/static/css/main.1e3c82f6.css.map",
-    "main.94d1b0bc.js.map": "/project_app/static/js/main.94d1b0bc.js.map"
+    "main.27deae98.js.map": "/project_app/static/js/main.27deae98.js.map"
   },
   "entrypoints": [
     "static/css/main.1e3c82f6.css",
-    "static/js/main.94d1b0bc.js"
+    "static/js/main.27deae98.js"
   ]
 }
